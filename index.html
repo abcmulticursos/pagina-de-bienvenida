@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenida a la Comunidad</title>
     <style>
-        /* Estilos generales para el fondo de la página */
+        /* --- ESTILOS GENERALES Y AJUSTABLES --- */
+        
         body {
+            /* Fondo de la página */
             background-color: #d927cc;
+            /* Color del texto fuera del formulario */
+            color: white;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
@@ -25,45 +29,48 @@
             text-align: center;
         }
 
-        /* Estilos para la foto circular */
-        .photo-container {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid #00ff00; /* Borde verde */
+        /* --- ESTILOS PARA LA IMAGEN DE BIENVENIDA --- */
+
+        .welcome-image-container {
             margin: 0 auto 20px;
         }
-        .photo-container img {
+        .welcome-image-container img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 300px; /* Tamaño máximo para la imagen */
+            height: auto;
+            border-radius: 17px; /* Borde redondeado de la imagen */
         }
 
-        /* Estilos para los rectángulos de texto */
+        /* --- ESTILOS PARA LOS RECTÁNGULOS DE TEXTO --- */
+
         .text-rectangle {
             background-color: #f3f0f0;
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 10px;
             text-align: center;
+            color: black; /* El texto dentro de los recuadros es negro */
         }
 
         .text-rectangle.large {
-            font-size: 20pt;
+            /* TAMAÑO DEL TEXTO GRANDE (BIENVENIDA) - Ajusta aquí */
+            font-size: 23pt;
             font-weight: bold;
         }
 
         .text-rectangle.small {
-            font-size: 12pt;
+            /* TAMAÑO DEL TEXTO PEQUEÑO - Ajusta aquí */
+            font-size: 15pt;
             font-weight: bold;
             line-height: 1.4;
         }
         
-        /* Estilos para el contenedor del formulario */
+        /* --- ESTILOS PARA EL FORMULARIO --- */
+
         .form-container {
             background-color: #fdd2fd;
-            border: 2px solid black;
+            /* GROSOR DEL CONTORNO DEL FORMULARIO - Ajusta aquí */
+            border: 1px solid black;
             border-radius: 10px;
             padding: 20px;
             margin-top: 20px;
@@ -76,7 +83,6 @@
             color: black;
         }
 
-        /* Estilos para los campos del formulario */
         .form-group {
             margin-bottom: 15px;
         }
@@ -85,7 +91,8 @@
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            font-size: 16px;
+            /* TAMAÑO DEL TEXTO EN EL FORMULARIO (PREGUNTAS) - Ajusta aquí */
+            font-size: 19px;
         }
 
         .form-group input,
@@ -122,8 +129,8 @@
 <body>
 
 <div class="main-container">
-    <div class="photo-container">
-        <img src="https://placehold.co/150x150/d927cc/white?text=Foto" alt="Foto de Perfil">
+    <div class="welcome-image-container">
+        <img src="images/isabel-nocturna-bienvenida.jpg" alt="Isabel Nocturna Bienvenida">
     </div>
 
     <div class="text-rectangle large">
