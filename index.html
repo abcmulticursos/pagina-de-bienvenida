@@ -14,7 +14,8 @@
             color: white;
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            /* MARGEN LATERAL DE 3MM - Ajusta aquí el valor */
+            padding: 20px 3mm; 
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -55,13 +56,13 @@
         .text-rectangle.large {
             /* TAMAÑO DEL TEXTO GRANDE (BIENVENIDA) - Ajusta aquí */
             font-size: 23pt;
-            font-weight: bold;
+            font-weight: normal; /* Texto en normal */
         }
 
         .text-rectangle.small {
             /* TAMAÑO DEL TEXTO PEQUEÑO - Ajusta aquí */
             font-size: 15pt;
-            font-weight: bold;
+            font-weight: normal; /* Texto en normal */
             line-height: 1.4;
         }
         
@@ -69,7 +70,7 @@
 
         .form-container {
             background-color: #fdd2fd;
-            /* GROSOR DEL CONTORNO DEL FORMULARIO - Ajusta aquí */
+            /* GROSOR DEL CONTORNO DEL FORMULARIO - 1px es el mínimo visible */
             border: 1px solid black;
             border-radius: 10px;
             padding: 20px;
@@ -91,6 +92,7 @@
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
+            color: black; /* COLOR DE LOS TEXTOS DE LAS PREGUNTAS - Ajusta aquí */
             /* TAMAÑO DEL TEXTO EN EL FORMULARIO (PREGUNTAS) - Ajusta aquí */
             font-size: 19px;
         }
@@ -138,19 +140,19 @@
     </div>
 
     <div class="text-rectangle small">
-        <strong>🟢 Te felicito por tus ganas de aprender. Recuerda que tu único Asesor es Alberto Salinas.</strong>
+        🟢 Te felicito por tus ganas de aprender. Recuerda que tu único Asesor es Alberto Salinas.
     </div>
 
     <div class="text-rectangle small">
-        <strong>❌ ☝🏼No te salgas del grupo por que perderás todo acceso, no te quedes atrás, tú puedes lograr y convertirte en esa confeccionista profesional que tando deseaste ser.</strong>
+        ❌ ☝🏼No te salgas del grupo por que perderás todo acceso, no te quedes atrás, tú puedes lograr y convertirte en esa confeccionista profesional que tando deseaste ser.
     </div>
 
     <div class="text-rectangle small">
-        <strong>🧵💖 #Yo si puedo #Por que soy yo y me lo merezco</strong>
+        🧵💖 #Yo si puedo #Por que soy yo y me lo merezco
     </div>
 
     <div class="text-rectangle small">
-        <strong>🔵 Te invito a responder estas preguntas, que tu respuesta nos ayudará a conocer más de tí y ayudarte. 😊👇🏼</strong>
+        🔵 Te invito a responder estas preguntas, que tu respuesta nos ayudará a conocer más de tí y ayudarte. 😊👇🏼
     </div>
 
     <div class="form-container">
@@ -188,7 +190,6 @@
             <button type="submit" class="submit-button">Enviar Respuesta</button>
         </form>
     </div>
-
 </div>
 
 </body>
