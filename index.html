@@ -13,31 +13,34 @@
             color: white;
             font-family: Arial, sans-serif;
             margin: 0;
-            /* MARGEN LATERAL DE 3MM - Ajusta aquí el valor */
-            padding: 20px 3mm;
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column; /* Para que los elementos se apilen correctamente */
+            align-items: center; /* Centrar horizontalmente */
             min-height: 100vh;
+            padding-top: 20px;
+            padding-bottom: 20px;
         }
 
         .main-container {
             max-width: 600px;
             width: 100%;
             background-color: transparent;
-            padding: 0;
+            padding-left: 10px; /* Pequeño margen izquierdo */
+            padding-right: 10px; /* Pequeño margen derecho */
             text-align: center;
         }
 
         /* --- ESTILOS PARA LA IMAGEN DE BIENVENIDA --- */
         .welcome-image-container {
-            margin: 0 auto 20px;
+            margin-bottom: 20px;
+            width: 100%; /* La imagen ocupa todo el ancho del contenedor principal */
+            max-width: 600px; /* Evita que la imagen sea más ancha que el contenedor */
         }
         .welcome-image-container img {
             width: 100%;
-            max-width: 300px; /* Tamaño máximo para la imagen */
             height: auto;
             border-radius: 17px; /* Borde redondeado de la imagen */
+            display: block; /* Evita espacio extra debajo de la imagen */
         }
 
         /* --- ESTILOS PARA LOS RECTÁNGULOS DE TEXTO --- */
@@ -48,6 +51,8 @@
             margin-bottom: 10px;
             text-align: center;
             color: black; /* El texto dentro de los recuadros es negro */
+            width: 100%; /* Ocupan todo el ancho del contenedor */
+            box-sizing: border-box; /* Incluye el padding y el borde en el ancho */
         }
 
         .text-rectangle.large {
@@ -73,6 +78,8 @@
             padding: 20px;
             margin-top: 20px;
             text-align: left;
+            width: 100%; /* Ocupa todo el ancho del contenedor */
+            box-sizing: border-box; /* Incluye el padding y el borde en el ancho */
         }
 
         .form-container h3 {
@@ -82,36 +89,21 @@
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 15px; /* Espacio estándar entre grupo de pregunta y respuesta */
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 5px; /* Espacio entre la pregunta y su campo */
             font-weight: bold;
             color: black; /* COLOR DE LOS TEXTOS DE LAS PREGUNTAS - Ajusta aquí */
             /* TAMAÑO DEL TEXTO EN EL FORMULARIO (PREGUNTAS) - Ajusta aquí */
             font-size: 19px;
-            /* ESPACIADO ENTRE PREGUNTAS - Ajusta aquí el valor para modificar el triple del espaciado */
-            margin-bottom: 15px; /* Valor base */
         }
 
-        /* El primer label no necesita margen extra */
-        .form-group:first-child label {
-            margin-bottom: 5px; /* Restablecer al valor original */
-        }
-
+        /* Aumentar el margen inferior de los campos (input, select, textarea) para separar las preguntas */
         .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border-radius: 5px;
-            border: 2px solid black;
-            background-color: white;
-            font-size: 16px;
-        }
-
+        .form-group select,
         .form-group textarea {
             width: 100%;
             padding: 10px;
@@ -120,6 +112,10 @@
             border: 2px solid black;
             background-color: white;
             font-size: 16px;
+            margin-bottom: 30px; /* Aumenta el espacio entre el campo actual y la siguiente pregunta */
+        }
+
+        .form-group textarea {
             /* AUMENTO DE LA ALTURA DEL CAMPO DE ESCRITURA - Ajusta aquí el valor */
             min-height: 150px;
         }
@@ -134,7 +130,8 @@
             font-size: 16px;
             font-weight: bold;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 10px; /* Espacio entre el último campo y el botón */
+            margin-bottom: 15px; /* Espacio debajo del botón */
         }
     </style>
 </head>
