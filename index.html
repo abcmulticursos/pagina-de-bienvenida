@@ -98,7 +98,10 @@
         font-size: 19px;
     }
 
-    /* Estilos de los campos de entrada unificados */
+    /*
+     * CORRECCIÓN: Estilos de los campos de entrada unificados
+     * para asegurar el mismo tamaño de fuente Y FUENTE en todos.
+     */
     .form-group input,
     .form-group select,
     .form-group textarea {
@@ -109,6 +112,7 @@
         border: 2px solid black;
         background-color: white;
         font-size: 19px;
+        font-family: Arial, sans-serif; /* AHORA SE APLICA DIRECTAMENTE A TODOS LOS CAMPOS */
         line-height: 1.2;
         margin-bottom: 30px;
     }
@@ -126,8 +130,8 @@
     /* ESTILO ADICIONAL: Para el texto de sugerencia "Tu respuesta" */
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-        color: #000000; /* Color negro */
-        opacity: 0.38; /* Opacidad del 38% */
+        color: #000000;
+        opacity: 0.38;
     }
 
     .submit-button {
