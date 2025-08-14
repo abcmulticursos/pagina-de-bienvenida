@@ -100,30 +100,28 @@
     }
 
     /* Tamaño de texto de campos de entrada */
-    .form-group input,
-    .form-group select {
-        width: 100%;
-        padding: 10px;
-        height: 54px;
-        box-sizing: border-box;
-        border-radius: 5px;
-        border: 2px solid black;
-        background-color: white;
-        font-size: 19px;
-        margin-bottom: 30px;
-    }
-    
-    .form-group textarea {
-        width: 100%;
-        padding: 10px;
-        box-sizing: border-box;
-        border-radius: 5px;
-        border: 2px solid black;
-        background-color: white;
-        font-size: 19px;
-        min-height: 255px;
-        margin-bottom: 30px;
-    }
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 2px solid black;
+    background-color: white;
+    font-size: 19px; /* Tamaño de fuente unificado */
+    margin-bottom: 30px;
+}
+
+/* Propiedades específicas para el tamaño de cada campo */
+.form-group input,
+.form-group select {
+    height: 54px;
+}
+
+.form-group textarea {
+    min-height: 255px;
+}
 
     .submit-button {
         background-color: #4CAF50;
