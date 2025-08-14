@@ -11,13 +11,11 @@
     }
 
     body {
-        /* Degradado y fondo fijo */
         background-image: linear-gradient(to bottom, #582695, #984af1);
         background-attachment: fixed;
         color: white;
         font-family: Arial, sans-serif;
         margin: 0;
-        /* Espacio lateral aumentado a 2.5mm */
         padding: 20px 2.5mm;
         display: flex;
         justify-content: center;
@@ -48,6 +46,11 @@
         display: block;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
+    
+    /* NUEVO ESTILO: Quita la sombra a una imagen específica */
+    .no-shadow img {
+        box-shadow: none;
+    }
 
     /* --- ESTILOS PARA LOS RECUADROS DE TEXTO --- */
     .text-rectangle {
@@ -74,7 +77,6 @@
 
     /* --- ESTILOS PARA EL FORMULARIO --- */
     .form-container {
-        /* Color de fondo del formulario */
         background-color: #d4f1fe;
         border: 1px solid #cccccc;
         border-radius: 10px;
@@ -97,7 +99,7 @@
         font-size: 19px;
     }
 
-    /* Tamaño de texto de campos de entrada (3 puntos más) */
+    /* Tamaño de texto de campos de entrada */
     .form-group input,
     .form-group select {
         width: 100%;
@@ -118,7 +120,6 @@
         border-radius: 5px;
         border: 2px solid black;
         background-color: white;
-        /* Tamaño de texto de campo de sugerencias (3 puntos más) */
         font-size: 19px;
         min-height: 255px;
         margin-bottom: 30px;
@@ -162,7 +163,7 @@
         🧵💖 <b>#Yo si puedo #Por que soy yo y me lo merezco.</b>
     </div>
 
-    <div class="welcome-image-container">
+    <div class="welcome-image-container no-shadow">
         <img src="images/cuentame-acerca-de-ti.png" alt="Cuéntame acerca de ti">
     </div>
 
