@@ -47,7 +47,6 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
     
-    /* ESTILO ESPECÍFICO para quitar la sombra de la imagen del formulario */
     .no-shadow img {
         box-shadow: none;
     }
@@ -99,10 +98,7 @@
         font-size: 19px;
     }
 
-    /*
-     * CORRECCIÓN: Estilos de los campos de entrada unificados
-     * para asegurar el mismo tamaño de fuente en todos.
-     */
+    /* Estilos de los campos de entrada unificados */
     .form-group input,
     .form-group select,
     .form-group textarea {
@@ -113,6 +109,7 @@
         border: 2px solid black;
         background-color: white;
         font-size: 19px;
+        line-height: 1.2;
         margin-bottom: 30px;
     }
     
@@ -124,6 +121,13 @@
     
     .form-group textarea {
         min-height: 255px;
+    }
+
+    /* ESTILO ADICIONAL: Para el texto de sugerencia "Tu respuesta" */
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: #000000; /* Color negro */
+        opacity: 0.38; /* Opacidad del 38% */
     }
 
     .submit-button {
@@ -176,52 +180,52 @@
         <form>
             <div class="form-group">
                 <label for="nombre-pais">1️⃣ ¿Cuál es tu nombre y de qué país nos visitas? 😊 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹</label>
-                <input type="text" id="nombre-pais" name="nombre-pais" placeholder="Tu Respuesta">
+                <input type="text" id="nombre-pais" name="nombre-pais" placeholder="Tu respuesta">
             </div>
 
             <div class="form-group">
                 <label for="asesor">2️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎</label>
-                <input type="text" id="asesor" name="asesor" placeholder="Tu Respuesta">
+                <input type="text" id="asesor" name="asesor" placeholder="Tu respuesta">
             </div>
 
             <div class="form-group">
                 <label for="formulario">3️⃣ Recibiste tu formulario de Patronaje Premium? 📘</label>
-                <input type="text" id="formulario" name="formulario" placeholder="Tu Respuesta">
+                <input type="text" id="formulario" name="formulario" placeholder="Tu respuesta">
             </div>
 
             <div class="form-group">
                 <label for="experiencia">4️⃣ Cuál es tu nivel de Experiencia, Principiante, Intermedia o Avanzada? 😊</label>
-                <input type="text" id="experiencia" name="experiencia" placeholder="Tu Respuesta">
+                <input type="text" id="experiencia" name="experiencia" placeholder="Tu respuesta">
             </div>
 
             <div class="form-group">
                 <label for="sesion">5️⃣ Estas lista para tu primera sesión o tienes un poco de temor?</label>
-                <input type="text" id="sesion" name="sesion" placeholder="Tu Respuesta">
+                <input type="text" id="sesion" name="sesion" placeholder="Tu respuesta">
             </div>
 
             <div class="form-group">
                 <label for="prenda">6️⃣ Que prenda de vestir te gustaría aprender? 👗👖👕👚</label>
-                <input type="text" id="prenda" name="prenda" placeholder="Tu Respuesta">
+                <input type="text" id="prenda" name="prenda" placeholder="Tu respuesta">
             </div>
 
             <div class="form-group">
                 <label for="clase">7️⃣ Te sientes lista para tu primera clase 👩🏻‍🎓👨‍🎓 o aún no? 😨</label>
-                <input type="text" id="clase" name="clase" placeholder="Tu Respuesta">
+                <input type="text" id="clase" name="clase" placeholder="Tu respuesta">
             </div>
 
             <div class="form-group">
                 <label for="no-gusta">8️⃣ Qué es lo que no te gusta en el grupo? 😰</label>
-                <input type="text" id="no-gusta" name="no-gusta" placeholder="Tu Respuesta">
+                <input type="text" id="no-gusta" name="no-gusta" placeholder="Tu respuesta">
             </div>
 
             <div class="form-group">
                 <label for="maestra">9️⃣ Ya conocías a la Maestra Isabel? 💁🏻‍♀️✂️👚</label>
-                <input type="text" id="maestra" name="maestra" placeholder="Tu Respuesta">
+                <input type="text" id="maestra" name="maestra" placeholder="Tu respuesta">
             </div>
 
             <div class="form-group">
                 <label for="sugerencias">1️⃣0️⃣ Envíanos un mensaje 😊</label>
-                <textarea id="sugerencias" name="sugerencias" placeholder="Tu Respuesta"></textarea>
+                <textarea id="sugerencias" name="sugerencias"></textarea>
             </div>
 
             <button type="submit" class="submit-button">Enviar Respuesta</button>
