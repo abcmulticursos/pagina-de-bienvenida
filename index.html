@@ -34,7 +34,7 @@
         align-items: center;
     }
 
-    /* --- ESTILOS PARA LA IMAGEN DE BIENVENIDA --- */
+    /* --- ESTILOS PARA LAS IMÁGENES --- */
     .welcome-image-container {
         margin-bottom: 20px;
         width: 100%;
@@ -47,7 +47,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
     
-    /* NUEVO ESTILO: Quita la sombra a una imagen específica */
+    /* ESTILO ESPECÍFICO para quitar la sombra de la imagen del formulario */
     .no-shadow img {
         box-shadow: none;
     }
@@ -99,29 +99,32 @@
         font-size: 19px;
     }
 
-    /* Tamaño de texto de campos de entrada */
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 2px solid black;
-    background-color: white;
-    font-size: 19px; /* Tamaño de fuente unificado */
-    margin-bottom: 30px;
-}
-
-/* Propiedades específicas para el tamaño de cada campo */
-.form-group input,
-.form-group select {
-    height: 54px;
-}
-
-.form-group textarea {
-    min-height: 255px;
-}
+    /*
+     * CORRECCIÓN: Estilos de los campos de entrada unificados
+     * para asegurar el mismo tamaño de fuente en todos.
+     */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: 2px solid black;
+        background-color: white;
+        font-size: 19px;
+        margin-bottom: 30px;
+    }
+    
+    /* Propiedades de tamaño específicas para cada tipo de campo */
+    .form-group input,
+    .form-group select {
+        height: 54px;
+    }
+    
+    .form-group textarea {
+        min-height: 255px;
+    }
 
     .submit-button {
         background-color: #4CAF50;
