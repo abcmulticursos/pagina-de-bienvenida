@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-s0cale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenida a la Comunidad</title>
 <style>
     /* --- ESTILOS GENERALES Y AJUSTABLES --- */
@@ -144,6 +144,26 @@
         margin-top: 10px;
         margin-bottom: 15px;
     }
+
+    /* --- NUEVOS ESTILOS PARA EL BOTÓN "LISTO" EN EL TEXTAREA --- */
+    .textarea-container {
+        position: relative;
+    }
+
+    .done-button {
+        position: absolute;
+        right: 15px;
+        bottom: 45px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: bold;
+        display: none; /* Oculto por defecto */
+    }
 </style>
 </head>
 <body>
@@ -260,9 +280,10 @@
                 <input type="text" id="maestra-isabel" name="maestra-isabel" placeholder="Tu respuesta">
             </div>
 
-            <div class="form-group">
+            <div class="form-group textarea-container">
                 <label for="mensaje">1️⃣3️⃣ Envíanos un mensaje</label>
-                <textarea id="mensaje" name="mensaje" onblur="clearIfEmpty(this)"></textarea>
+                <textarea id="mensaje" name="mensaje" oninput="toggleDoneButton()"></textarea>
+                <button type="button" class="done-button" onclick="hideKeyboard()">Listo</button>
             </div>
             
             <button type="submit" class="submit-button">Enviar Respuesta</button>
@@ -271,10 +292,20 @@
 </div>
 
 <script>
-    function clearIfEmpty(element) {
-        if (element.value === "") {
-            element.value = "";
+    function toggleDoneButton() {
+        const mensajeTextarea = document.getElementById('mensaje');
+        const doneButton = document.querySelector('.done-button');
+        if (mensajeTextarea.value.length > 0) {
+            doneButton.style.display = 'block';
+        } else {
+            doneButton.style.display = 'none';
         }
+    }
+
+    function hideKeyboard() {
+        const mensajeTextarea = document.getElementById('mensaje');
+        mensajeTextarea.blur(); // Esto oculta el teclado
+        toggleDoneButton(); // Oculta el botón "Listo"
     }
 </script>
 
