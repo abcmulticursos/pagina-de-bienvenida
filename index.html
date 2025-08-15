@@ -180,61 +180,96 @@
         🔵 <b>Te invito a responder estas preguntas,</b> que tu respuesta nos ayudará a conocer más de tí y orientarte. 😊👇🏼
     </div>
 
-    <div class="form-container">
-        <form>
-            <div class="form-group">
-                <label for="nombre-pais">1️⃣ ¿Cuál es tu nombre y de qué país nos visitas? 😊 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹</label>
-                <input type="text" id="nombre-pais" name="nombre-pais" placeholder="Tu respuesta">
-            </div>
+<div class="form-container">
+    <form>
+        <div class="form-group">
+            <label for="nombre">1️⃣ ¿Cuál es tu nombre? </label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu respuesta">
+        </div>
 
-            <div class="form-group">
-                <label for="asesor">2️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎</label>
-                <input type="text" id="asesor" name="asesor" placeholder="Tu respuesta">
-            </div>
+        <div class="form-group">
+            <label for="pais">2️⃣ ¿De qué pais nos visitas? 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹</label>
+            <input type="text" id="pais" name="pais" placeholder="Tu respuesta">
+        </div>
 
-            <div class="form-group">
-                <label for="formulario">3️⃣ Recibiste tu formulario de Patronaje Premium? 📘</label>
-                <input type="text" id="formulario" name="formulario" placeholder="Tu respuesta">
-            </div>
+        <div class="form-group">
+            <label for="telefono">3️⃣ Tu Teléfono </label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Tu respuesta">
+        </div>
 
-            <div class="form-group">
-                <label for="experiencia">4️⃣ Cuál es tu nivel de Experiencia, Principiante, Intermedia o Avanzada? 😊</label>
-                <input type="text" id="experiencia" name="experiencia" placeholder="Tu respuesta">
-            </div>
+        <div class="form-group">
+            <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎</label>
+            <select id="asesor" name="asesor">
+                <option value="" disabled selected hidden>Selecciona una opción</option>
+                <option value="si">Sí, Alberto es mi Asesor 😊✅</option>
+                <option value="no">No sé quien es mi Asesor 😰❌</option>
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label for="sesion">5️⃣ Estas lista para tu primera sesión o tienes un poco de temor?</label>
-                <input type="text" id="sesion" name="sesion" placeholder="Tu respuesta">
-            </div>
+        <div class="form-group">
+            <label for="formulario-importancia">5️⃣ Sabías que el formulario de Patronaje es importante para que aprendas tu primera toma de medidas y hacer tu primer patrón de costura? ✂️👚</label>
+            <select id="formulario-importancia" name="formulario-importancia">
+                <option value="" disabled selected hidden>Selecciona una opción</option>
+                <option value="no-sabia">No lo sabía 😱❌</option>
+                <option value="ahora-se">Ahora sé que es importante 😊✅</option>
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label for="prenda">6️⃣ Que prenda de vestir te gustaría aprender? 👗👖👕👚</label>
-                <input type="text" id="prenda" name="prenda" placeholder="Tu respuesta">
-            </div>
+        <div class="form-group">
+            <label for="recibiste-formulario">6️⃣ ¿Recibiste tu formulario de Patronaje Premium? 📘</label>
+            <select id="recibiste-formulario" name="recibiste-formulario">
+                <option value="" disabled selected hidden>Selecciona una opción</option>
+                <option value="si-tengo">Sí, lo tengo gracias! 🤗✅</option>
+                <option value="no-pedi">No lo pedí 😥</option>
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label for="clase">7️⃣ Te sientes lista para tu primera clase 👩🏻‍🎓👨‍🎓 o aún no? 😨</label>
-                <input type="text" id="clase" name="clase" placeholder="Tu respuesta">
-            </div>
+        <div class="form-group">
+            <label for="envio-whatsapp">7️⃣ ¿Deseas que el Asesor Alberto te envíe el Formulario de Patronaje por Whatsapp? 👉🏼📲</label>
+            <select id="envio-whatsapp" name="envio-whatsapp">
+                <option value="" disabled selected hidden>Selecciona una opción</option>
+                <option value="si-necesito">Sí por favor, lo necesito 🙏🏼</option>
+                <option value="ya-tengo">Ya lo tengo! 🙌🏼</option>
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label for="no-gusta">8️⃣ Qué es lo que no te gusta en el grupo? 😰</label>
-                <input type="text" id="no-gusta" name="no-gusta" placeholder="Tu respuesta">
-            </div>
+        <div class="form-group">
+            <label for="experiencia">8️⃣ ¿Cuál es tu nivel de Experiencia? 😊</label>
+            <select id="experiencia" name="experiencia">
+                <option value="" disabled selected hidden>Selecciona una opción</option>
+                <option value="principiante">Principiante 🐣</option>
+                <option value="intermedio">Intermedio 🤗</option>
+                <option value="avanzado">Avanzado 👩🏻‍🎓</option>
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label for="maestra">9️⃣ Ya conocías a la Maestra Isabel? 💁🏻‍♀️✂️👚</label>
-                <input type="text" id="maestra" name="maestra" placeholder="Tu respuesta">
-            </div>
+        <div class="form-group">
+            <label for="sesion-temor">9️⃣ ¿Estas list@ para tu primera sesión 👩🏻‍🎓👨‍🎓 o tienes un poco de temor 😨?</label>
+            <input type="text" id="sesion-temor" name="sesion-temor" placeholder="Tu respuesta">
+        </div>
 
-            <div class="form-group">
-                <label for="sugerencias">1️⃣0️⃣ Envíanos un mensaje 😊</label>
-                <textarea id="sugerencias" name="sugerencias"></textarea>
-            </div>
+        <div class="form-group">
+            <label for="prenda">1️⃣0️⃣ ¿Que prenda de vestir te gustaría aprender? 👗👖👕👚</label>
+            <input type="text" id="prenda" name="prenda" placeholder="Tu respuesta">
+        </div>
 
-            <button type="submit" class="submit-button">Enviar Respuesta</button>
-        </form>
-    </div>
+        <div class="form-group">
+            <label for="no-gusta">1️⃣1️⃣ ¿Qué es lo que no te gusta en el grupo? 😰</label>
+            <input type="text" id="no-gusta" name="no-gusta" placeholder="Tu respuesta">
+        </div>
+
+        <div class="form-group">
+            <label for="maestra-isabel">1️⃣2️⃣ Ya conocías a la Maestra Isabel? 💁🏻‍♀️✂️👚</label>
+            <input type="text" id="maestra-isabel" name="maestra-isabel" placeholder="Tu respuesta">
+        </div>
+
+        <div class="form-group">
+            <label for="mensaje">1️⃣3️⃣ Envíanos un mensaje</label>
+            <textarea id="mensaje" name="mensaje"></textarea>
+        </div>
+        
+        <button type="submit" class="submit-button">Enviar Respuesta</button>
+    </form>
 </div>
 
 </body>
