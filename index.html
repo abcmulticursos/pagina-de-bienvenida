@@ -97,6 +97,12 @@
         color: black;
         font-size: 19px;
     }
+    
+    /* Estilo para el asterisco rojo de "obligatorio" */
+    .form-group label .required-asterisk {
+        color: red;
+        margin-left: 2px;
+    }
 
     /* Estilos de los campos de entrada unificados */
     .form-group input,
@@ -178,24 +184,27 @@
     </div>
 
     <div class="form-container">
+        <p style="color: red; font-size: 14px; margin-top: -10px;">
+            * Todos los campos son obligatorios
+        </p>
         <form>
             <div class="form-group">
-                <label for="nombre">1️⃣ ¿Cuál es tu nombre? </label>
+                <label for="nombre">1️⃣ ¿Cuál es tu nombre?<span class="required-asterisk">*</span></label>
                 <input type="text" id="nombre" name="nombre" placeholder="Tu respuesta" required>
             </div>
 
             <div class="form-group">
-                <label for="pais">2️⃣ ¿De qué pais nos visitas? 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹</label>
+                <label for="pais">2️⃣ ¿De qué pais nos visitas? 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹<span class="required-asterisk">*</span></label>
                 <input type="text" id="pais" name="pais" placeholder="Tu respuesta" required>
             </div>
 
             <div class="form-group">
-                <label for="telefono">3️⃣ Tu Teléfono </label>
+                <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
                 <input type="tel" id="telefono" name="telefono" placeholder="Tu respuesta" required>
             </div>
 
             <div class="form-group">
-                <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎</label>
+                <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎<span class="required-asterisk">*</span></label>
                 <select id="asesor" name="asesor" required>
                     <option value="" disabled selected hidden>Selecciona una opción</option>
                     <option value="si">Sí, Alberto es mi Asesor 😊✅</option>
@@ -204,7 +213,7 @@
             </div>
 
             <div class="form-group">
-                <label for="formulario-importancia">5️⃣ Sabías que el formulario de Patronaje es importante para que aprendas tu primera toma de medidas y hacer tu primer patrón de costura? ✂️👚</label>
+                <label for="formulario-importancia">5️⃣ Sabías que el formulario de Patronaje es importante para que aprendas tu primera toma de medidas y hacer tu primer patrón de costura? ✂️👚<span class="required-asterisk">*</span></label>
                 <select id="formulario-importancia" name="formulario-importancia" required>
                     <option value="" disabled selected hidden>Selecciona una opción</option>
                     <option value="no-sabia">No lo sabía, soy nueva 😊</option>
@@ -213,7 +222,7 @@
             </div>
 
             <div class="form-group">
-                <label for="recibiste-formulario">6️⃣ ¿Recibiste tu formulario de Patronaje Premium? 📘</label>
+                <label for="recibiste-formulario">6️⃣ ¿Recibiste tu formulario de Patronaje Premium? 📘<span class="required-asterisk">*</span></label>
                 <select id="recibiste-formulario" name="recibiste-formulario" required>
                     <option value="" disabled selected hidden>Selecciona una opción</option>
                     <option value="si-tengo">Sí, lo tengo gracias! 🤗✅</option>
@@ -222,7 +231,7 @@
             </div>
 
             <div class="form-group">
-                <label for="envio-whatsapp">7️⃣ ¿Deseas que el Asesor Alberto te envíe el Formulario de Patronaje por Whatsapp? 👉🏼📲</label>
+                <label for="envio-whatsapp">7️⃣ ¿Deseas que el Asesor Alberto te envíe el Formulario de Patronaje por Whatsapp? 👉🏼📲<span class="required-asterisk">*</span></label>
                 <select id="envio-whatsapp" name="envio-whatsapp" required>
                     <option value="" disabled selected hidden>Selecciona una opción</option>
                     <option value="si-necesito">Sí por favor, lo necesito 🙏🏼</option>
@@ -231,7 +240,7 @@
             </div>
 
             <div class="form-group">
-                <label for="experiencia">8️⃣ ¿Cuál es tu nivel de Experiencia? 😊</label>
+                <label for="experiencia">8️⃣ ¿Cuál es tu nivel de Experiencia? 😊<span class="required-asterisk">*</span></label>
                 <select id="experiencia" name="experiencia" required>
                     <option value="" disabled selected hidden>Selecciona una opción</option>
                     <option value="principiante">Principiante 🐣</option>
@@ -241,27 +250,27 @@
             </div>
 
             <div class="form-group">
-                <label for="sesion-temor">9️⃣ ¿Estas list@ para tu primera sesión 👩🏻‍🎓👨‍🎓 o tienes un poco de temor 😨?</label>
+                <label for="sesion-temor">9️⃣ ¿Estas list@ para tu primera sesión 👩🏻‍🎓👨‍🎓 o tienes un poco de temor 😨?<span class="required-asterisk">*</span></label>
                 <input type="text" id="sesion-temor" name="sesion-temor" placeholder="Tu respuesta" required>
             </div>
 
             <div class="form-group">
-                <label for="prenda">1️⃣0️⃣ ¿Que prenda de vestir te gustaría aprender? 👗👖👕👚</label>
+                <label for="prenda">1️⃣0️⃣ ¿Que prenda de vestir te gustaría aprender? 👗👖👕👚<span class="required-asterisk">*</span></label>
                 <input type="text" id="prenda" name="prenda" placeholder="Tu respuesta" required>
             </div>
 
             <div class="form-group">
-                <label for="no-gusta">1️⃣1️⃣ ¿Qué es lo que no te gusta en el grupo? 😰</label>
+                <label for="no-gusta">1️⃣1️⃣ ¿Qué es lo que no te gusta en el grupo? 😰<span class="required-asterisk">*</span></label>
                 <input type="text" id="no-gusta" name="no-gusta" placeholder="Tu respuesta" required>
             </div>
 
             <div class="form-group">
-                <label for="maestra-isabel">1️⃣2️⃣ Ya conocías a la Maestra Isabel? 💁🏻‍♀️✂️👚</label>
+                <label for="maestra-isabel">1️⃣2️⃣ Ya conocías a la Maestra Isabel? 💁🏻‍♀️✂️👚<span class="required-asterisk">*</span></label>
                 <input type="text" id="maestra-isabel" name="maestra-isabel" placeholder="Tu respuesta" required>
             </div>
 
             <div class="form-group">
-                <label for="mensaje">1️⃣3️⃣ Envíanos un mensaje</label>
+                <label for="mensaje">1️⃣3️⃣ Envíanos un mensaje<span class="required-asterisk">*</span></label>
                 <textarea id="mensaje" name="mensaje" required></textarea>
             </div>
             
