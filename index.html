@@ -112,7 +112,7 @@
         padding: 10px;
         box-sizing: border-box;
         border-radius: 5px;
-        border: 1px solid black; /* grosor de línea a 1px */
+        border: 1px solid black;
         background-color: white;
         font-size: 19px;
         font-family: Arial, sans-serif;
@@ -126,8 +126,14 @@
         height: 54px;
     }
     
+    /* Altura por defecto para el textarea del campo 13 */
     .form-group textarea {
         min-height: 255px;
+    }
+
+    /* Nueva clase para los textareas más cortos (preguntas 11 y 12) */
+    .short-textarea {
+        min-height: 100px;
     }
 
     /* ESTILO ADICIONAL: Para el texto de sugerencia "Tu respuesta" */
@@ -153,9 +159,9 @@
     
     /* ESTILOS PARA LA IMAGEN Y BOTÓN DE AGRADECIMIENTO */
     #mensaje-exito {
-        display: none; /* Inicia oculto */
+        display: none;
         margin-top: 20px;
-        max-width: 600px; /* Asegura que la imagen y el botón no sean demasiado grandes */
+        max-width: 600px;
         width: 100%;
         text-align: center;
     }
@@ -169,7 +175,7 @@
 
     .whatsapp-button {
         display: block;
-        margin: 30px auto 0; /* Centra el botón y añade un margen superior */
+        margin: 30px auto 0;
         max-width: 300px;
         padding: 15px 30px;
         text-decoration: none;
@@ -177,13 +183,13 @@
         font-size: 18px;
         font-weight: bold;
         color: white;
-        background-color: #25D366; /* Color de WhatsApp */
+        background-color: #25D366;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         transition: background-color 0.3s;
     }
 
     .whatsapp-button:hover {
-        background-color: #128C7E; /* Un tono más oscuro para el efecto al pasar el mouse */
+        background-color: #128C7E;
     }
 </style>
 </head>
@@ -307,12 +313,12 @@
 
             <div class="form-group">
                 <label for="prenda">1️⃣1️⃣ ¿Que prenda de vestir te gustaría aprender? 👗👖👕👚<span class="required-asterisk">*</span></label>
-                <textarea id="prenda" name="prenda" placeholder="Tu respuesta" required></textarea>
+                <textarea id="prenda" name="prenda" placeholder="Tu respuesta" required class="short-textarea"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="no-gusta">1️⃣2️⃣ ¿Qué es lo que no te gusta en el grupo? 😰<span class="required-asterisk">*</span></label>
-                <textarea id="no-gusta" name="no-gusta" placeholder="Tu respuesta" required></textarea>
+                <textarea id="no-gusta" name="no-gusta" placeholder="Tu respuesta" required class="short-textarea"></textarea>
             </div>
 
             <div class="form-group">
@@ -328,7 +334,7 @@
 <div id="mensaje-exito">
     <img src="images/felicidades-nos-vemos-en-whatsapp.jpg" alt="Felicidades nos vemos en WhatsApp">
     
-    <a href="https://wa.me/+51965723248" class="whatsapp-button" target="_blank">
+    <a href="https://wa.me/TU_NUMERO_DE_TELEFONO_AQUI" class="whatsapp-button" target="_blank">
         Ir al chat de WhatsApp
     </a>
 </div>
