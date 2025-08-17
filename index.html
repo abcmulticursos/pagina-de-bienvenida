@@ -112,7 +112,7 @@
         padding: 10px;
         box-sizing: border-box;
         border-radius: 5px;
-        border: 2px solid black;
+        border: 1px solid black; /* grosor de línea a 1px */
         background-color: white;
         font-size: 19px;
         font-family: Arial, sans-serif;
@@ -223,7 +223,7 @@
 
     <div class="form-container" id="form-container">
         <p style="color: red; font-size: 14px; margin-top: -10px;">
-            * Todos los campos son obligatorios
+            * Los campos con asterisco son obligatorios
         </p>
         <form action="https://script.google.com/macros/s/AKfycbxrI7FqEGnbekaTfnJSKn-CNKB0cK8graaGBDxrUd23OaocZCQkLSIioF3v2nC-_XqYIw/exec" method="POST" id="miFormulario">
             <div class="form-group">
@@ -289,27 +289,47 @@
 
             <div class="form-group">
                 <label for="sesion-temor">9️⃣ ¿Estas list@ para tu primera sesión 👩🏻‍🎓👨‍🎓 o tienes un poco de temor 😨?<span class="required-asterisk">*</span></label>
-                <input type="text" id="sesion-temor" name="sesion-temor" placeholder="Tu respuesta" required>
+                <select id="sesion-temor" name="sesion-temor" required>
+                    <option value="" disabled selected hidden>Selecciona una opción</option>
+                    <option value="Estoy-lista">Estoy list@ ✌🏼</option>
+                    <option value="tengo-temor">Tengo un poco de temor 🥺</option>
+                </select>
             </div>
 
             <div class="form-group">
                 <label for="prenda">1️⃣0️⃣ ¿Que prenda de vestir te gustaría aprender? 👗👖👕👚<span class="required-asterisk">*</span></label>
-                <input type="text" id="prenda" name="prenda" placeholder="Tu respuesta" required>
+                <select id="prenda" name="prenda" required>
+                    <option value="" disabled selected hidden>Selecciona una opción</option>
+                    <option value="faldas">Faldas</option>
+                    <option value="pantalones">Pantalones</option>
+                    <option value="vestidos">Vestidos</option>
+                    <option value="blusas">Blusas</option>
+                    <option value="otros">Otros</option>
+                </select>
             </div>
 
             <div class="form-group">
                 <label for="no-gusta">1️⃣1️⃣ ¿Qué es lo que no te gusta en el grupo? 😰<span class="required-asterisk">*</span></label>
-                <input type="text" id="no-gusta" name="no-gusta" placeholder="Tu respuesta" required>
+                <select id="no-gusta" name="no-gusta" required>
+                    <option value="" disabled selected hidden>Selecciona una opción</option>
+                    <option value="muchos-mensajes">Muchos mensajes</option>
+                    <option value="no-entender">No entender los temas</option>
+                    <option value="otro">Otro</option>
+                </select>
             </div>
 
             <div class="form-group">
                 <label for="maestra-isabel">1️⃣2️⃣ Ya conocías a la Maestra Isabel? 💁🏻‍♀️✂️👚<span class="required-asterisk">*</span></label>
-                <input type="text" id="maestra-isabel" name="maestra-isabel" placeholder="Tu respuesta" required>
+                <select id="maestra-isabel" name="maestra-isabel" required>
+                    <option value="" disabled selected hidden>Selecciona una opción</option>
+                    <option value="si-la-conozco">Sí la conozco 😊</option>
+                    <option value="no-la-conocia">No la conocía ☺️</option>
+                </select>
             </div>
 
             <div class="form-group">
-                <label for="mensaje">1️⃣3️⃣ Envíanos un mensaje<span class="required-asterisk">*</span></label>
-                <textarea id="mensaje" name="mensaje" required></textarea>
+                <label for="mensaje">1️⃣3️⃣ Envíanos un mensaje</label>
+                <textarea id="mensaje" name="mensaje"></textarea>
             </div>
             
             <button type="submit" class="submit-button">Enviar Respuesta</button>
@@ -320,7 +340,7 @@
 <div id="mensaje-exito">
     <img src="images/felicidades-nos-vemos-en-whatsapp.jpg" alt="Felicidades nos vemos en WhatsApp">
     
-    <a href="https://wa.me/+51965723248" class="whatsapp-button" target="_blank">
+    <a href="https://wa.me/TU_NUMERO_DE_TELEFONO_AQUI" class="whatsapp-button" target="_blank">
         Ir al chat de WhatsApp
     </a>
 </div>
