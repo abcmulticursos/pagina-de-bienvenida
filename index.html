@@ -151,11 +151,11 @@
         margin-bottom: 15px;
     }
     
-    /* ESTILOS PARA LA IMAGEN DE AGRADECIMIENTO */
+    /* ESTILOS PARA LA IMAGEN Y BOTÓN DE AGRADECIMIENTO */
     #mensaje-exito {
         display: none; /* Inicia oculto */
         margin-top: 20px;
-        max-width: 600px; /* Asegura que la imagen no sea demasiado grande */
+        max-width: 600px; /* Asegura que la imagen y el botón no sean demasiado grandes */
         width: 100%;
         text-align: center;
     }
@@ -165,6 +165,25 @@
         height: auto;
         border-radius: 17px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .whatsapp-button {
+        display: block;
+        margin: 30px auto 0; /* Centra el botón y añade un margen superior */
+        max-width: 300px;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background-color: #25D366; /* Color de WhatsApp */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s;
+    }
+
+    .whatsapp-button:hover {
+        background-color: #128C7E; /* Un tono más oscuro para el efecto al pasar el mouse */
     }
 </style>
 </head>
@@ -300,6 +319,10 @@
 
 <div id="mensaje-exito">
     <img src="images/felicidades-nos-vemos-en-whatsapp.jpg" alt="Felicidades nos vemos en WhatsApp">
+    
+    <a href="https://wa.me/+51965723248" class="whatsapp-button" target="_blank">
+        Ir al chat de WhatsApp
+    </a>
 </div>
 
 <script>
