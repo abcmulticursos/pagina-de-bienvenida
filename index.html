@@ -116,20 +116,18 @@
         background-color: white;
         font-size: 19px;
         font-family: Arial, sans-serif;
-        line-height: 1.2; /* Mantiene un espaciado adecuado para el texto escrito */
+        line-height: 1.2;
         margin-bottom: 30px;
     }
 
     /* PROPIEDADES DE ALTURA ACTUALIZADAS */
     /* Regla para los campos que deben tener una altura fija de 54px */
     .form-group input,
-    .form-group select,
-    .form-group textarea#prenda,
-    .form-group textarea#no-gusta {
+    .form-group select {
         height: 54px;
-        line-height: 54px; /* Centra verticalmente el placeholder */
+        line-height: 54px;
     }
-
+    
     /* Regla específica para el campo de mensaje largo */
     .form-group textarea#mensaje {
         min-height: 255px;
@@ -217,7 +215,7 @@
 
 <div style="height: 100px;"></div>
 
-    
+
     <div class="welcome-image-container no-shadow">
         <img src="images/cuentame-acerca-de-ti.jpg" alt="Cuéntame acerca de ti">
     </div>
@@ -230,7 +228,7 @@
         <p style="color: red; font-size: 14px; margin-top: -10px;">
             * Los campos con asterisco son obligatorios
         </p>
-        <form action="[https://script.google.com/macros/s/AKfycbxrI7FqEGnbekaTfnJSKn-CNKB0cK8graaGBDxrUd23OaocZCQkLSIioF3v2nC-_XqYIw/exec](https://script.google.com/macros/s/AKfycbxrI7FqEGnbekaTfnJSKn-CNKB0cK8graaGBDxrUd23OaocZCQkLSIioF3v2nC-_XqYIw/exec)" method="POST" id="miFormulario">
+        <form action="https://script.google.com/macros/s/AKfycbxrI7FqEGnbekaTfnJSKn-CNKB0cK8graaGBDxrUd23OaocZCQkLSIioF3v2nC-_XqYIw/exec" method="POST" id="miFormulario">
             <div class="form-group">
                 <label for="nombre">1️⃣ ¿Cuál es tu nombre?<span class="required-asterisk">*</span></label>
                 <input type="text" id="nombre" name="nombre" placeholder="Tu respuesta" required>
@@ -312,12 +310,12 @@
 
             <div class="form-group">
                 <label for="prenda">1️⃣1️⃣ ¿Que prenda de vestir te gustaría aprender? 👗👖👕👚<span class="required-asterisk">*</span></label>
-                <textarea id="prenda" name="prenda" placeholder="Tu respuesta" required></textarea>
+                <input type="text" id="prenda" name="prenda" placeholder="Tu respuesta" required>
             </div>
 
             <div class="form-group">
                 <label for="no-gusta">1️⃣2️⃣ ¿Qué es lo que no te gusta en el grupo? 😰<span class="required-asterisk">*</span></label>
-                <textarea id="no-gusta" name="no-gusta" placeholder="Tu respuesta" required></textarea>
+                <input type="text" id="no-gusta" name="no-gusta" placeholder="Tu respuesta" required>
             </div>
 
             <div class="form-group">
@@ -333,7 +331,7 @@
 <div id="mensaje-exito">
     <img src="images/felicidades-nos-vemos-en-whatsapp.jpg" alt="Felicidades nos vemos en WhatsApp">
 
-    <a href="[https://wa.me/+51965723248](https://wa.me/+51965723248)" class="whatsapp-button" target="_blank">
+    <a href="https://wa.me/+51965723248" class="whatsapp-button" target="_blank">
         Ir al chat de WhatsApp
     </a>
 </div>
