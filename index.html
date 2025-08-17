@@ -120,13 +120,15 @@
         margin-bottom: 30px;
     }
     
-    /* Propiedades de tamaño para campos de una línea y menús */
+    /* PROPIEDADES DE ALTURA ACTUALIZADAS */
+    /* Regla para los campos que deben tener una altura fija de 54px */
     .form-group input,
     .form-group select,
-    .form-group textarea {
-        min-height: 54px;
+    .form-group textarea#prenda,
+    .form-group textarea#no-gusta {
+        height: 54px; 
     }
-    
+
     /* Regla específica para el campo de mensaje largo */
     .form-group textarea#mensaje {
         min-height: 255px;
