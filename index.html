@@ -120,20 +120,16 @@
         margin-bottom: 30px;
     }
     
-    /* Propiedades de tamaño específicas para cada tipo de campo */
+    /* Propiedades de tamaño para campos de una línea y menús */
     .form-group input,
-    .form-group select {
-        height: 54px;
+    .form-group select,
+    .form-group textarea {
+        min-height: 54px;
     }
     
-    /* Altura por defecto para el textarea del campo 13 */
-    .form-group textarea {
+    /* Regla específica para el campo de mensaje largo */
+    .form-group textarea#mensaje {
         min-height: 255px;
-    }
-
-    /* Nueva clase para los textareas más cortos (preguntas 11 y 12) */
-    .short-textarea {
-        min-height: 100px;
     }
 
     /* ESTILO ADICIONAL: Para el texto de sugerencia "Tu respuesta" */
@@ -313,12 +309,12 @@
 
             <div class="form-group">
                 <label for="prenda">1️⃣1️⃣ ¿Que prenda de vestir te gustaría aprender? 👗👖👕👚<span class="required-asterisk">*</span></label>
-                <textarea id="prenda" name="prenda" placeholder="Tu respuesta" required class="short-textarea"></textarea>
+                <textarea id="prenda" name="prenda" placeholder="Tu respuesta" required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="no-gusta">1️⃣2️⃣ ¿Qué es lo que no te gusta en el grupo? 😰<span class="required-asterisk">*</span></label>
-                <textarea id="no-gusta" name="no-gusta" placeholder="Tu respuesta" required class="short-textarea"></textarea>
+                <textarea id="no-gusta" name="no-gusta" placeholder="Tu respuesta" required></textarea>
             </div>
 
             <div class="form-group">
@@ -334,7 +330,7 @@
 <div id="mensaje-exito">
     <img src="images/felicidades-nos-vemos-en-whatsapp.jpg" alt="Felicidades nos vemos en WhatsApp">
     
-    <a href="https://wa.me/TU_NUMERO_DE_TELEFONO_AQUI" class="whatsapp-button" target="_blank">
+    <a href="https://wa.me/+51965723248" class="whatsapp-button" target="_blank">
         Ir al chat de WhatsApp
     </a>
 </div>
