@@ -234,10 +234,26 @@
                 <input type="text" id="nombre" name="nombre" placeholder="Tu respuesta" required>
             </div>
 
-            <div class="form-group">
-                <label for="pais">2️⃣ ¿De qué pais nos visitas? 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹<span class="required-asterisk">*</span></label>
-                <input type="text" id="pais" name="pais" placeholder="Tu respuesta" required>
-            </div>
+<div class="form-group">
+    <label for="pais">2️⃣ ¿De qué país nos visitas? <span class="required-asterisk">*</span></label>
+    <select id="pais" name="pais" required>
+        <option value="" disabled selected hidden>Selecciona tu país</option>
+        <option value="Colombia">🇨🇴 Colombia</option>
+        <option value="México">🇲🇽 México</option>
+        <option value="Perú">🇵🇪 Perú</option>
+        <option value="Ecuador">🇪🇨 Ecuador</option>
+        <option value="Chile">🇨🇱 Chile</option>
+        <option value="Bolivia">🇧🇴 Bolivia</option>
+        <option value="Guatemala">🇬🇹 Guatemala</option>
+        <option value="El Salvador">🇸🇻 El Salvador</option>
+        <option value="Argentina">🇦🇷 Argentina</option>
+        <option value="Venezuela">🇻🇪 Venezuela</option>
+        <option value="Honduras">🇭🇳 Honduras</option>
+        <option value="Uruguay">🇺🇾 Uruguay</option>
+        <option value="Costa Rica">🇨🇷 Costa Rica</option>
+    </select>
+</div>
+
 
             <div class="form-group">
                 <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
