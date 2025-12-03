@@ -120,13 +120,23 @@
         margin-bottom: 30px;
     }
 
-    /* PROPIEDADES DE ALTURA ACTUALIZADAS */
-    /* Regla para los campos que deben tener una altura fija de 54px */
-    .form-group input,
-    .form-group select {
-        height: 54px;
-        line-height: 54px;
-    }
+/* PROPIEDADES DE ALTURA ACTUALIZADAS */
+/* Regla para los campos que deben tener una altura fija de 54px */
+.form-group input,
+.form-group select {
+    height: 54px;
+}
+.form-group input:not([type="tel"]) {
+    /* Mantenemos line-height solo para inputs que no sean de teléfono */
+    line-height: 54px;
+}
+
+/* RESTAURACIÓN DE ESTILO: Para asegurar el tamaño de fuente y padding correcto en el select de país */
+.form-group select {
+    font-size: 19px; 
+    padding: 0 10px;
+    /* QUITAMOS line-height para corregir el problema de altura en el selector */
+}
 
     /* *** ESTILOS CLAVE AÑADIDOS/MODIFICADOS PARA EL INPUT DE TELÉFONO *** */
     /* Contenedor del campo de teléfono */
