@@ -192,26 +192,47 @@
 /* *** ESTILOS CLAVE AÑADIDOS/MODIFICADOS PARA EL INPUT DE TELÉFONO *** */
 /* Contenedor del campo de teléfono */
 .phone-input-container {
-    /* CLAVE: Solo lo restauramos a un contenedor simple con margen de separación */
-    position: relative;
-    width: 100%; 
-    margin-bottom: 30px; /* Para mantener el espaciado entre preguntas */
-    height: 54px; /* Lo mantenemos, aunque el input ya lo define */
-    /* IMPORTANTE: Quitamos todos los estilos de borde y fondo del contenedor */
+    display: flex; /* Hacemos que los elementos internos se pongan en línea */
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 0; 
     border: none;
     background: none;
-    padding: 0;
 }
 
-/* El campo de input en sí */
+/* Estilo para el input del prefijo */
+.prefix-input {
+    width: 30%; /* Espacio para el prefijo y la bandera */
+    height: 54px;
+    line-height: 54px;
+    margin-right: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    /* Estilos del campo normal */
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: white;
+    font-size: 19px;
+    font-family: Arial, sans-serif;
+    margin-bottom: 0 !important; /* Quita el margen inferior general */
+}
+
+/* Estilo para el input del número de teléfono */
 .form-group input[type="tel"] {
-    /* CLAVE: Lo restauramos a un campo normal, solo aseguramos que el margen sea 0 */
-    margin-bottom: 0;
-    padding-left: 10px; /* Restauramos el padding estándar */
-    /* IMPORTANTE: Quitamos cualquier borde o fondo especial. Debería heredar el estilo general. */
-    border: 1px solid black; 
+    width: 70%; /* Espacio restante para el número */
+    padding-left: 10px;
+    margin-bottom: 0 !important; /* Quita el margen inferior general */
+    /* Aseguramos que herede el estilo general de input */
+    border: 1px solid black;
     background-color: white;
     border-radius: 5px;
+    height: 54px;
+    line-height: 54px;
 }
 
 </style>
@@ -280,11 +301,14 @@
     <option value="Otro País" data-prefijo="" data-bandera="🌎">🌎 Otro País</option>
 </select>
 
-            <div class="form-group">
+<div class="form-group">
 <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
                 <div class="phone-input-container">
-                    <input type="tel" id="telefono" name="telefono" placeholder="Número de Teléfono" required pattern="[0-9]*" inputmode="numeric">
+                    <input type="text" id="prefijo" name="prefijo" class="prefix-input" value="" readonly tabindex="-1">
+                    <input type="tel" id="telefono" name="telefono" placeholder="Número de Teléfono" required pattern="[0-9]*" inputmode="numeric" maxlength="15">
+                    <input type="hidden" id="telefono_completo" name="telefono_completo">
                 </div>
+            </div>
 
             <div class="form-group">
                 <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎<span class="required-asterisk">*</span></label>
@@ -403,65 +427,97 @@
     // Asegurar que la función se ejecute al cargar para inicializar el campo si hay un país por defecto (Aunque el select tiene "disabled selected hidden")
     // Se añade un pequeño retardo para asegurar que el DOM se haya cargado completamente
 
-    // 3. Lógica principal del formulario (AJUSTADA)
-    document.addEventListener('DOMContentLoaded', function() {
-        const formulario = document.getElementById('miFormulario');
-        const mainContainer = document.getElementById('main-container');
-        const mensajeExito = document.getElementById('mensaje-exito');
-        const paisSelect = document.getElementById('pais');
-        const telefonoInput = document.getElementById('telefono');
-        const telefonoCompletoInput = document.getElementById('telefono_completo');
-        
+ // 2. Función para actualizar el campo de teléfono basado en el país
+    function updatePhoneInput() {
+        const paisSelect = document.getElementById('pais');
+        const prefijoInput = document.getElementById('prefijo');
+        const telefonoInput = document.getElementById('telefono');
+        
+        // Debe haber una opción seleccionada
+        const selectedOption = paisSelect.options[paisSelect.selectedIndex];
+        
+        // Verifica si la opción es válida (no es el placeholder)
+        if (selectedOption.value) {
+            const prefijo = selectedOption.getAttribute('data-prefijo');
+            const bandera = selectedOption.getAttribute('data-bandera');
+            const pais = selectedOption.value;
+            const formato = formatos[pais] || { min: 6, max: 15, placeholder: 'Número de Teléfono' };
 
-        formulario.addEventListener('submit', function(event) {
-            
-            // 1. Validar la longitud del teléfono ANTES de detener el evento
-            const selectedOption = paisSelect.options[paisSelect.selectedIndex];
-            const pais = selectedOption.value;
-            const formato = formatos[pais] || { min: 6, max: 15 };
-            const telefonoNumero = telefonoInput.value.trim();
-            
-            // Validar que se haya seleccionado un país y el número sea correcto
-            if (pais === "") {
-                alert('Por favor, selecciona tu país (pregunta 2).');
-                event.preventDefault();
-                return;
-            }
-
-            if (telefonoNumero.length < formato.min || telefonoNumero.length > formato.max) {
-                alert(`El número de teléfono para ${pais} debe tener entre ${formato.min} y ${formato.max} dígitos.`);
-                event.preventDefault();
-                return;
-            }
-
-// 2. Ensamblar el número de teléfono completo (solo el número, ya no hay prefijo)
-            const telefonoFinal = telefonoNumero;
+            // 1. Actualizar el input de prefijo con bandera y prefijo
+            prefijoInput.value = `${bandera} ${prefijo}`;
             
-            // 3. Asignar el valor final al campo oculto que se enviará al Google Sheet
+            // 2. Actualizar el placeholder para mostrar el formato esperado (cantidad de caracteres)
+            telefonoInput.placeholder = formato.placeholder;
+            
+        } else {
+            // Si no hay país seleccionado, limpiar el campo de prefijo
+            prefijoInput.value = '';
+            telefonoInput.placeholder = 'Número de Teléfono';
+        }
+    }
+
+
+    // 3. Lógica principal del formulario (AJUSTADA)
+    document.addEventListener('DOMContentLoaded', function() {
+        const formulario = document.getElementById('miFormulario');
+        const mainContainer = document.getElementById('main-container');
+        const mensajeExito = document.getElementById('mensaje-exito');
+        const paisSelect = document.getElementById('pais');
+        const telefonoInput = document.getElementById('telefono');
+        const prefijoInput = document.getElementById('prefijo'); // ¡Añadimos esta variable!
+        const telefonoCompletoInput = document.getElementById('telefono_completo');
+        
+        // Inicializar y escuchar el cambio en el selector de país
+        updatePhoneInput(); 
+        paisSelect.addEventListener('change', updatePhoneInput);
+
+        formulario.addEventListener('submit', function(event) {
+            event.preventDefault(); // Detiene el envío normal del formulario
+
+            // --- VALIDACIONES ---
+            const selectedOption = paisSelect.options[paisSelect.selectedIndex];
+            const pais = selectedOption.value;
+            const formato = formatos[pais] || { min: 6, max: 15 };
+            const telefonoNumero = telefonoInput.value.trim();
+            const prefijo = prefijoInput.value.trim();
+            
+            if (pais === "") {
+                alert('Por favor, selecciona tu país (pregunta 2).');
+                return;
+            }
+
+            if (telefonoNumero.length < formato.min || telefonoNumero.length > formato.max) {
+                alert(`El número de teléfono para ${pais} debe tener entre ${formato.min} y ${formato.max} dígitos.`);
+                return;
+            }
+            // --- FIN VALIDACIONES ---
+
+            // Ensamblar el número de teléfono completo (Prefijo + Número)
+            const telefonoFinal = `${prefijo}${telefonoNumero}`;
+            
+            // Asignar el valor final al campo oculto que se enviará al Google Sheet
             telefonoCompletoInput.value = telefonoFinal;
 
+            // Oculta todo el contenido principal y muestra la imagen de agradecimiento
+            mainContainer.style.display = 'none';
+            mensajeExito.style.display = 'block';
 
-            // Detiene el envío normal del formulario (ESTO DEBE IR DESPUÉS DE LA VALIDACIÓN)
-            event.preventDefault();
+            // Desplaza la página al inicio de forma suave
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
 
-            // Oculta todo el contenido principal y muestra la imagen de agradecimiento
-            mainContainer.style.display = 'none';
-            mensajeExito.style.display = 'block';
+            // Envía los datos a Google Sheets usando la API Fetch
+            const formData = new FormData(formulario);
+            const scriptURL = formulario.getAttribute('action');
 
-            // Desplaza la página al inicio de forma suave
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-
-            // Envía los datos a Google Sheets usando la API Fetch
-            const formData = new FormData(formulario);
-            const scriptURL = formulario.getAttribute('action');
-
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(response => console.log('Envío exitoso!', response))
-                .catch(error => console.error('Error!', error));
-        });
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => console.log('Envío exitoso!', response))
+                .catch(error => console.error('Error!', error));
+        });
+        
+    });
         
     });
 </script>
