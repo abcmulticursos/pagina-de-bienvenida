@@ -375,7 +375,7 @@ const paisesInfo = {
     "Costa Rica": {prefijo: "+506", longitud: 8}
 };
 
-const prefijoSpan = document.getElementById('prefijo-telefono');
+// Manejo del input de teléfono por país
 const inputTelefono = document.getElementById('telefono');
 const selectPais = document.getElementById('pais');
 
@@ -383,23 +383,22 @@ selectPais.addEventListener('change', function() {
     const pais = selectPais.value;
     if (paisesInfo[pais]) {
         const info = paisesInfo[pais];
-// prefijo visible eliminado, solo control de longitud
-inputTelefono.maxLength = info.longitud; 
-inputTelefono.value = ''; // limpiar número anterior
-        inputTelefono.maxLength = info.longitud; // mantener cantidad de dígitos
-        inputTelefono.value = ''; // limpiar número anterior
+        inputTelefono.maxLength = info.longitud; // Limita la cantidad de dígitos
+        inputTelefono.value = ''; // Limpia el número anterior
     }
 });
 
-
-inputTelefono.addEventListener('keydown', function(e) {
+inputTelefono.addEventListener('input', function() {
     const pais = selectPais.value;
-    if (!paisesInfo[pais]) return;
-    const prefijoLength = paisesInfo[pais].prefijo.length + 1; // +1 por el espacio
-    if ((this.selectionStart <= prefijoLength) && (e.key === "Backspace" || e.key === "Delete")) {
-        e.preventDefault();
+    if (paisesInfo[pais]) {
+        const info = paisesInfo[pais];
+        if (this.value.length > info.longitud) {
+            this.value = this.value.slice(0, info.longitud); // Cortar si excede longitud
+        }
     }
 });
+
+
 
     
     document.addEventListener('DOMContentLoaded', function() {
