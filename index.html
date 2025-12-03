@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-s0cale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenida a la Comunidad</title>
 <style>
     /* --- ESTILOS GENERALES Y AJUSTABLES --- */
@@ -255,10 +255,10 @@
 </div>
 
 
-            <div class="form-group">
-                <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
-                <input type="tel" id="telefono" name="telefono" placeholder="Tu respuesta" required>
-            </div>
+<div class="form-group">
+    <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
+    <input type="tel" id="telefono" name="telefono" placeholder="Tu respuesta" required>
+</div>
 
             <div class="form-group">
                 <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎<span class="required-asterisk">*</span></label>
@@ -352,7 +352,49 @@
     </a>
 </div>
 
+
+
+    
 <script>
+// Configuración de prefijo y longitud por país
+const paisesInfo = {
+    "Colombia": {prefijo: "+57", longitud: 10},
+    "México": {prefijo: "+52", longitud: 10},
+    "Perú": {prefijo: "+51", longitud: 9},
+    "Ecuador": {prefijo: "+593", longitud: 9},
+    "Chile": {prefijo: "+56", longitud: 9},
+    "Bolivia": {prefijo: "+591", longitud: 8},
+    "Guatemala": {prefijo: "+502", longitud: 8},
+    "El Salvador": {prefijo: "+503", longitud: 8},
+    "Argentina": {prefijo: "+54", longitud: 10},
+    "Venezuela": {prefijo: "+58", longitud: 10},
+    "Honduras": {prefijo: "+504", longitud: 8},
+    "Uruguay": {prefijo: "+598", longitud: 9},
+    "Costa Rica": {prefijo: "+506", longitud: 8}
+};
+
+const selectPais = document.getElementById('pais');
+const inputTelefono = document.getElementById('telefono');
+
+selectPais.addEventListener('change', function() {
+    const pais = selectPais.value;
+    if (paisesInfo[pais]) {
+        const info = paisesInfo[pais];
+        inputTelefono.value = info.prefijo;
+        inputTelefono.maxLength = info.prefijo.length + info.longitud;
+    }
+});
+
+inputTelefono.addEventListener('keydown', function(e) {
+    const pais = selectPais.value;
+    if (!paisesInfo[pais]) return;
+    const prefijoLength = paisesInfo[pais].prefijo.length;
+    if ((this.selectionStart <= prefijoLength) && (e.key === "Backspace" || e.key === "Delete")) {
+        e.preventDefault();
+    }
+});
+
+    
     document.addEventListener('DOMContentLoaded', function() {
         const formulario = document.getElementById('miFormulario');
         const mainContainer = document.getElementById('main-container');
