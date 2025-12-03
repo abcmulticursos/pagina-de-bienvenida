@@ -257,8 +257,12 @@
 
 <div class="form-group">
     <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
-    <input type="tel" id="telefono" name="telefono" placeholder="Tu respuesta" required>
+    <div style="display: flex; align-items: center; gap: 5px;">
+        <span id="prefijo-telefono" style="font-size:19px; font-weight:bold;">+51</span>
+        <input type="tel" id="telefono" name="telefono" placeholder="Tu número" required>
+    </div>
 </div>
+
 
             <div class="form-group">
                 <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎<span class="required-asterisk">*</span></label>
@@ -373,18 +377,20 @@ const paisesInfo = {
     "Costa Rica": {prefijo: "+506", longitud: 8}
 };
 
-const selectPais = document.getElementById('pais');
+const prefijoSpan = document.getElementById('prefijo-telefono');
 const inputTelefono = document.getElementById('telefono');
+const selectPais = document.getElementById('pais');
 
 selectPais.addEventListener('change', function() {
     const pais = selectPais.value;
     if (paisesInfo[pais]) {
         const info = paisesInfo[pais];
-        // Agregamos un espacio después del prefijo
-        inputTelefono.value = info.prefijo + " ";
-        inputTelefono.maxLength = info.prefijo.length + 1 + info.longitud; // +1 por el espacio
+        prefijoSpan.textContent = info.prefijo; // mostrar prefijo separado
+        inputTelefono.maxLength = info.longitud; // mantener cantidad de dígitos
+        inputTelefono.value = ''; // limpiar número anterior
     }
 });
+
 
 inputTelefono.addEventListener('keydown', function(e) {
     const pais = selectPais.value;
