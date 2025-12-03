@@ -206,13 +206,14 @@
         padding-left: 120px; /* Espacio suficiente para la bandera y el prefijo */
     }
 
-    /* Estilo para el elemento que contendrá el emoji y prefijo */
+/* Estilo para el elemento que contendrá el emoji y prefijo */
+    /* **MODIFICADO para mostrarlo DENTRO del input, sin borde** */
     #flag-prefix-display {
         position: absolute;
         top: 0;
         left: 0;
         height: 54px;
-        line-height: 54px; /* Centra verticalmente */
+        line-height: 54px; /* Centra verticalmente (necesita un padding superior e inferior de 0) */
         padding: 0 10px;
         color: black;
         font-size: 19px;
@@ -220,7 +221,7 @@
         pointer-events: none; /* Permite hacer clic en el input detrás */
         background: transparent;
         z-index: 10;
-        border-right: 1px solid #ccc; 
+        border-right: none; /* ELIMINADO: No queremos borde separador */
         /* Asegura que el texto no se envuelva */
         white-space: nowrap; 
     }
@@ -271,19 +272,24 @@
             </div>
 
 <div class="form-group">
-                <label for="pais">2️⃣ ¿De qué pais nos visitas? 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹<span class="required-asterisk">*</span></label>
-                <select id="pais" name="pais" required onchange="updatePhoneInput()">
-                    <option value="" disabled selected hidden>Selecciona un país</option>
-                    <option value="Perú" data-prefijo="+51" data-bandera="🇵🇪">Perú 🇵🇪 (+51)</option>
-                    <option value="Colombia" data-prefijo="+57" data-bandera="🇨🇴">Colombia 🇨🇴 (+57)</option>
-                    <option value="Ecuador" data-prefijo="+593" data-bandera="🇪🇨">Ecuador 🇪🇨 (+593)</option>
-                    <option value="México" data-prefijo="+52" data-bandera="🇲🇽">México 🇲🇽 (+52)</option>
-                    <option value="Chile" data-prefijo="+56" data-bandera="🇨🇱">Chile 🇨🇱 (+56)</option>
-                    <option value="Bolivia" data-prefijo="+591" data-bandera="🇧🇴">Bolivia 🇧🇴 (+591)</option>
-                    <option value="Guatemala" data-prefijo="+502" data-bandera="🇬🇹">Guatemala 🇬🇹 (+502)</option>
-                    <option value="Otro País" data-prefijo="" data-bandera="🌎">Otro País 🌎</option>
-                </select>
-            </div>
+<label for="pais">2️⃣ ¿De qué país nos visitas?<span class="required-asterisk">*</span></label>
+<select id="pais" name="pais" required onchange="updatePhoneInput()">
+    <option value="" disabled selected hidden>Selecciona un país</option>
+    <option value="Colombia" data-prefijo="+57" data-bandera="🇨🇴">Colombia</option>
+    <option value="México" data-prefijo="+52" data-bandera="🇲🇽">México</option>
+    <option value="Perú" data-prefijo="+51" data-bandera="🇵🇪">Perú</option>
+    <option value="Ecuador" data-prefijo="+593" data-bandera="🇪🇨">Ecuador</option>
+    <option value="Chile" data-prefijo="+56" data-bandera="🇨🇱">Chile</option>
+    <option value="Bolivia" data-prefijo="+591" data-bandera="🇧🇴">Bolivia</option>
+    <option value="Guatemala" data-prefijo="+502" data-bandera="🇬🇹">Guatemala</option>
+    <option value="El Salvador" data-prefijo="+503" data-bandera="🇸🇻">El Salvador</option>
+    <option value="Argentina" data-prefijo="+54" data-bandera="🇦🇷">Argentina</option>
+    <option value="Venezuela" data-prefijo="+58" data-bandera="🇻🇪">Venezuela</option>
+    <option value="Honduras" data-prefijo="+504" data-bandera="🇭🇳">Honduras</option>
+    <option value="Uruguay" data-prefijo="+598" data-bandera="🇺🇾">Uruguay</option>
+    <option value="Costa Rica" data-prefijo="+506" data-bandera="🇨🇷">Costa Rica</option>
+    <option value="Otro País" data-prefijo="" data-bandera="🌎">Otro País</option>
+</select>
 
             <div class="form-group">
                 <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
@@ -389,17 +395,23 @@
 <script>
     // *** LÓGICA DE VALIDACIÓN Y FORMATO DE TELÉFONO ***
 
-    // 1. Objeto que define el formato (mínimo/máximo de dígitos) por país.
-    const formatos = {
-        'Perú': { min: 9, max: 9, placeholder: 'Ej: 987654321' },
-        'Colombia': { min: 10, max: 10, placeholder: 'Ej: 3001234567' },
-        'Ecuador': { min: 9, max: 9, placeholder: 'Ej: 987654321' },
-        'México': { min: 10, max: 10, placeholder: 'Ej: 5512345678' },
-        'Chile': { min: 9, max: 9, placeholder: 'Ej: 987654321' },
-        'Bolivia': { min: 8, max: 8, placeholder: 'Ej: 71234567' },
-        'Guatemala': { min: 8, max: 8, placeholder: 'Ej: 51234567' },
-        'Otro País': { min: 6, max: 15, placeholder: 'Ingresa tu número (sin código de área)' }
-    };
+// 1. Objeto que define el formato (mínimo/máximo de dígitos) por país.
+    const formatos = {
+        'Perú': { min: 9, max: 9, placeholder: 'Ej: 987654321 (9 dígitos)' },
+        'Colombia': { min: 10, max: 10, placeholder: 'Ej: 3001234567 (10 dígitos)' },
+        'Ecuador': { min: 9, max: 9, placeholder: 'Ej: 987654321 (9 dígitos)' },
+        'México': { min: 10, max: 10, placeholder: 'Ej: 5512345678 (10 dígitos)' },
+        'Chile': { min: 9, max: 9, placeholder: 'Ej: 987654321 (9 dígitos)' },
+        'Bolivia': { min: 8, max: 8, placeholder: 'Ej: 71234567 (8 dígitos)' },
+        'Guatemala': { min: 8, max: 8, placeholder: 'Ej: 51234567 (8 dígitos)' },
+        'El Salvador': { min: 8, max: 8, placeholder: 'Ej: 71234567 (8 dígitos)' },
+        'Argentina': { min: 10, max: 10, placeholder: 'Ej: 1112345678 (10 dígitos)' },
+        'Venezuela': { min: 10, max: 10, placeholder: 'Ej: 4141234567 (10 dígitos)' },
+        'Honduras': { min: 8, max: 8, placeholder: 'Ej: 91234567 (8 dígitos)' },
+        'Uruguay': { min: 8, max: 8, placeholder: 'Ej: 98765432 (8 dígitos)' },
+        'Costa Rica': { min: 8, max: 8, placeholder: 'Ej: 81234567 (8 dígitos)' },
+        'Otro País': { min: 6, max: 15, placeholder: 'Ingresa tu número (sin código de área)' }
+    };
 
     // 2. Función para actualizar la bandera y el prefijo
     function updatePhoneInput() {
