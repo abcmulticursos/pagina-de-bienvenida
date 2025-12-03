@@ -104,29 +104,66 @@
         margin-left: 2px;
     }
 
-    /* Estilos de los campos de entrada unificados */
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        padding: 10px;
-        box-sizing: border-box;
-        border-radius: 5px;
-        border: 1px solid black;
-        background-color: white;
-        font-size: 19px;
-        font-family: Arial, sans-serif;
-        line-height: 1.2;
-        margin-bottom: 30px;
-    }
+/* Estilos de los campos de entrada unificados */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: white;
+        font-size: 19px;
+        font-family: Arial, sans-serif;
+        line-height: 1.2;
+        margin-bottom: 30px;
+    }
 
-    /* PROPIEDADES DE ALTURA ACTUALIZADAS */
-    /* Regla para los campos que deben tener una altura fija de 54px */
-    .form-group input,
-    .form-group select {
-        height: 54px;
-        line-height: 54px;
-    }
+    /* PROPIEDADES DE ALTURA ACTUALIZADAS */
+    /* Regla para los campos que deben tener una altura fija de 54px */
+    .form-group input,
+    .form-group select {
+        height: 54px;
+        line-height: 54px;
+    }
+
+    /* *** ESTILOS CLAVE AÑADIDOS/MODIFICADOS PARA EL INPUT DE TELÉFONO *** */
+    /* Contenedor del campo de teléfono */
+    .phone-input-container {
+        position: relative;
+        width: 100%;
+        margin-bottom: 30px; /* Para mantener el espaciado entre preguntas */
+        height: 54px; /* Aseguramos la altura uniforme */
+    }
+
+    /* El campo de input en sí */
+    .form-group input[type="tel"] {
+        /* Usamos padding-left para que el texto NO se superponga con la bandera/prefijo */
+        padding-left: 120px; /* Espacio suficiente para la bandera y el prefijo */
+        margin-bottom: 0; /* Eliminamos el margen duplicado del input */
+        height: 54px; /* Aseguramos la altura uniforme */
+        line-height: 54px; /* Centra el texto verticalmente */
+    }
+
+    /* Estilo para el elemento que contendrá el emoji y prefijo */
+    #flag-prefix-display {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 54px;
+        line-height: 54px; /* Centra verticalmente */
+        padding: 0 10px;
+        color: black;
+        font-size: 19px;
+        font-weight: normal;
+        pointer-events: none; /* Permite hacer clic en el input detrás */
+        background: transparent;
+        z-index: 10;
+        border-right: 1px solid #ccc;
+        /* Asegura que el texto no se envuelva */
+        white-space: nowrap;
+    }
     
     /* Regla específica para el campo de mensaje largo */
     .form-group textarea#mensaje {
@@ -235,38 +272,39 @@
             </div>
 
 <div class="form-group">
-    <label for="pais">2️⃣ ¿De qué país nos visitas?<span class="required-asterisk">*</span></label>
+    <label for="pais">2️⃣ ¿De qué país nos visitas?<span class="required-asterisk">*</span></label>
 
-    <select id="pais" name="pais" required style="
-        font-size: 20px;
-        height: 60px;
-        padding: 13px;
-        border-radius: 10px;
-        width: 100%;
-    ">
-        <option value="">Selecciona tu país</option>
-        <option value="colombia">🇨🇴 Colombia</option>
-        <option value="mexico">🇲🇽 México</option>
-        <option value="peru">🇵🇪 Perú</option>
-        <option value="ecuador">🇪🇨 Ecuador</option>
-        <option value="chile">🇨🇱 Chile</option>
-        <option value="bolivia">🇧🇴 Bolivia</option>
-        <option value="guatemala">🇬🇹 Guatemala</option>
-        <option value="elsalvador">🇸🇻 El Salvador</option>
-        <option value="argentina">🇦🇷 Argentina</option>
-        <option value="venezuela">🇻🇪 Venezuela</option>
-        <option value="honduras">🇭🇳 Honduras</option>
-        <option value="uruguay">🇺🇾 Uruguay</option>
-        <option value="costarica">🇨🇷 Costa Rica</option>
-    </select>
+    <select id="pais" name="pais" required style="
+        font-size: 20px;
+        height: 60px;
+        padding: 13px;
+        border-radius: 10px;
+        width: 100%;
+    ">
+        <option value="" data-prefijo="">Selecciona tu país</option>
+        <option value="colombia" data-prefijo="🇨🇴 +57">🇨🇴 Colombia</option>
+        <option value="mexico" data-prefijo="🇲🇽 +52">🇲🇽 México</option>
+        <option value="peru" data-prefijo="🇵🇪 +51">🇵🇪 Perú</option>
+        <option value="ecuador" data-prefijo="🇪🇨 +593">🇪🇨 Ecuador</option>
+        <option value="chile" data-prefijo="🇨🇱 +56">🇨🇱 Chile</option>
+        <option value="bolivia" data-prefijo="🇧🇴 +591">🇧🇴 Bolivia</option>
+        <option value="guatemala" data-prefijo="🇬🇹 +502">🇬🇹 Guatemala</option>
+        <option value="elsalvador" data-prefijo="🇸🇻 +503">🇸🇻 El Salvador</option>
+        <option value="argentina" data-prefijo="🇦🇷 +54">🇦🇷 Argentina</option>
+        <option value="venezuela" data-prefijo="🇻🇪 +58">🇻🇪 Venezuela</option>
+        <option value="honduras" data-prefijo="🇭🇳 +504">🇭🇳 Honduras</option>
+        <option value="uruguay" data-prefijo="🇺🇾 +598">🇺🇾 Uruguay</option>
+        <option value="costarica" data-prefijo="🇨🇷 +506">🇨🇷 Costa Rica</option>
+    </select>
 </div>
 
-
-
-            <div class="form-group">
-                <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
-                <input type="tel" id="telefono" name="telefono" placeholder="Tu respuesta" required>
-            </div>
+<div class="form-group">
+                <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
+                <div class="phone-input-container">
+                    <span id="flag-prefix-display"></span>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎<span class="required-asterisk">*</span></label>
@@ -360,50 +398,140 @@
     </a>
 </div>
 
-    <script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const pais = document.getElementById("pais");
-    const telefono = document.getElementById("telefono");
+    const formulario = document.getElementById("miFormulario");
+    const paisSelect = document.getElementById("pais");
+    const telefonoInput = document.getElementById("telefono");
+    const prefixDisplay = document.getElementById("flag-prefix-display");
+    const submitButton = formulario.querySelector(".submit-button");
 
-    const reglas = {
-        colombia:  /^(\+57)?3\d{9}$/,
-        mexico:    /^(\+52)?\d{10}$/,
-        peru:      /^(\+51)?9\d{8}$/,
-        ecuador:   /^(\+593)?09\d{8}$/,
-        chile:     /^(\+56)?9\d{8}$/,
-        bolivia:   /^(\+591)?[67]\d{7}$/,
-        guatemala: /^(\+502)?[3-5]\d{7}$/,
-        elsalvador:/^(\+503)?[6-7]\d{7}$/,
-        argentina: /^(\+54)?9\d{10}$/,
-        venezuela: /^(\+58)?4\d{9}$/,
-        honduras:  /^(\+504)?[389]\d{7}$/,
-        uruguay:   /^(\+598)?9\d{7}$/,
-        costarica: /^(\+506)?[6-8]\d{7}$/
-    };
+    // Definición de formatos, incluye REGEX para validación.
+    const formatos = {
+        colombia: { prefijo: "+57", placeholder: "3XX XXX XXXX", regex: /^3\d{9}$/, cleanedLength: 10 },
+        mexico: { prefijo: "+52", placeholder: "XX XXXX XXXX", regex: /^\d{10}$/, cleanedLength: 10 },
+        peru: { prefijo: "+51", placeholder: "9XX XXX XXX", regex: /^9\d{8}$/, cleanedLength: 9 },
+        ecuador: { prefijo: "+593", placeholder: "9XX XXX XXX", regex: /^09\d{8}$/, cleanedLength: 10 },
+        chile: { prefijo: "+56", placeholder: "9 XXXX XXXX", regex: /^9\d{8}$/, cleanedLength: 9 },
+        bolivia: { prefijo: "+591", placeholder: "7XX XXXX", regex: /^[67]\d{7}$/, cleanedLength: 8 },
+        guatemala: { prefijo: "+502", placeholder: "XXXX XXXX", regex: /^[3-5]\d{7}$/, cleanedLength: 8 },
+        elsalvador: { prefijo: "+503", placeholder: "XXXX XXXX", regex: /^[6-7]\d{7}$/, cleanedLength: 8 },
+        argentina: { prefijo: "+54", placeholder: "9 XX XXXX XXXX", regex: /^9\d{10}$/, cleanedLength: 11 },
+        venezuela: { prefijo: "+58", placeholder: "4XX XXX XXXX", regex: /^4\d{9}$/, cleanedLength: 10 },
+        honduras: { prefijo: "+504", placeholder: "XXXX XXXX", regex: /^[389]\d{7}$/, cleanedLength: 8 },
+        uruguay: { prefijo: "+598", placeholder: "9 XXXX XXXX", regex: /^9\d{7}$/, cleanedLength: 8 },
+        costarica: { prefijo: "+506", placeholder: "XXXX XXXX", regex: /^[6-8]\d{7}$/, cleanedLength: 8 },
+        default: { prefijo: "", placeholder: "Tu número de teléfono", regex: /^\d{5,15}$/, cleanedLength: null }
+    };
 
-    telefono.addEventListener("input", function () {
-        this.value = this.value.replace(/[^0-9+]/g, '');
-    });
+    // Función principal para actualizar el input al cambiar el país
+    function updatePhoneInput() {
+        const selectedOption = paisSelect.options[paisSelect.selectedIndex];
+        const countryCode = selectedOption.value;
+        const prefixDisplayValue = selectedOption.getAttribute('data-prefijo') || '';
+        const format = formatos[countryCode] || formatos.default;
 
-    document.getElementById("miFormulario").addEventListener("submit", function (e) {
-        const paisElegido = pais.value;
-        const numero = telefono.value.replace(/\s+/g, '').trim();
+        // 1. Actualiza el prefijo visual
+        prefixDisplay.textContent = prefixDisplayValue;
 
-        if (!paisElegido) {
-            alert("Selecciona tu país");
-            pais.focus();
-            e.preventDefault();
-            return;
-        }
+        // 2. Actualiza el placeholder (Aunque lo hayamos quitado en HTML, es bueno tenerlo como fallback o para referencia)
+        telefonoInput.placeholder = format.placeholder;
 
-        if (!reglas[paisElegido].test(numero)) {
-            alert("El número de teléfono no corresponde al país seleccionado");
-            telefono.focus();
-            e.preventDefault();
-        }
+        // 3. Limpia el valor y fuerza la re-validación
+        validatePhone(true);
+    }
 
-    });
+    // Función para limpiar el input y validar
+    function validatePhone(clearInput = false) {
+        // Limpia solo dígitos (no permitimos el signo + en el input directo)
+        let cleanedNumber = telefonoInput.value.replace(/\D/g, '');
+        telefonoInput.value = cleanedNumber;
+
+        const countryCode = paisSelect.value;
+        const format = formatos[countryCode] || formatos.default;
+
+        // Validación visual: si existe un formato, verifica el REGEX
+        if (format && format.regex) {
+            if (format.regex.test(cleanedNumber)) {
+                telefonoInput.style.border = '1px solid green';
+            } else {
+                telefonoInput.style.border = '1px solid red';
+            }
+        } else {
+            // Si no hay país seleccionado, volvemos al estilo por defecto
+            telefonoInput.style.border = '1px solid black';
+        }
+    }
+
+    // EVENT LISTENERS
+    // 1. Al cambiar el país
+    paisSelect.addEventListener("change", updatePhoneInput);
+
+    // 2. Al escribir en el input de teléfono
+    telefonoInput.addEventListener("input", validatePhone);
+
+    // Inicializar el input con el valor por defecto si existe, o limpiar.
+    updatePhoneInput();
+
+    // 3. Manejo del Submit del Formulario
+    formulario.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const countryCode = paisSelect.value;
+        const format = formatos[countryCode];
+        let cleanedNumber = telefonoInput.value.replace(/\D/g, '');
+        
+        // VALIDACIÓN FINAL
+        if (!countryCode) {
+            alert("Por favor, selecciona tu país.");
+            paisSelect.focus();
+            return;
+        }
+
+        if (!format || !format.regex.test(cleanedNumber)) {
+            alert("El número de teléfono no es válido para " + paisSelect.options[paisSelect.selectedIndex].text.trim());
+            telefonoInput.focus();
+            return;
+        }
+
+        // Limpia el número antes de enviarlo
+        const finalPhoneNumber = format.prefijo + cleanedNumber;
+        
+        // Crea un campo oculto para enviar el número completo (prefijo + número limpio)
+        let hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "telefono_completo"; // Nuevo campo para enviar a la hoja de cálculo
+        hiddenInput.value = finalPhoneNumber;
+        formulario.appendChild(hiddenInput);
+
+        // Sobreescribe el campo de teléfono original (opcional, pero puede ser útil si el script de Google busca "telefono")
+        telefonoInput.value = finalPhoneNumber;
+
+
+        // Proceder con el envío
+        const formData = new FormData(formulario);
+        submitButton.disabled = true;
+        submitButton.textContent = "Enviando...";
+
+        fetch(formulario.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                document.getElementById("main-container").style.display = 'none';
+                document.getElementById("mensaje-exito").style.display = 'block';
+            } else {
+                throw new Error('Error al enviar el formulario.');
+            }
+        })
+        .catch(error => {
+            alert('Hubo un error al enviar el formulario. Intenta de nuevo.');
+            console.error('Error:', error);
+            submitButton.disabled = false;
+            submitButton.textContent = "Enviar Respuesta";
+        });
+    });
 });
 </script>
 
