@@ -498,7 +498,7 @@ inputPrefijo.value = prefijo;
             // Limpia el número de espacios o guiones antes de combinar
             const numeroLimpio = numero.replace(/[^0-9]/g, '');
 
-            if (prefijo === '--') {
+if (prefijo === '---' || prefijo === '--') {
                  // Si es "Otro país", no se concatena el código internacional
                  inputTelefonoCompleto.value = numeroLimpio;
             } else {
