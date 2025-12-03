@@ -199,12 +199,16 @@
     }
 
 /* El campo de input en sí */
-    .form-group input[type="tel"] {
-        /* Se mantiene el height y line-height de 54px para el centrado vertical */
-        margin-bottom: 0; /* Eliminamos el margen duplicado del estilo general */
-        /* Añadimos padding a la izquierda para que el texto NO se superponga con la bandera/prefijo */
-        padding-left: 135px; /* *** AUMENTADO: Da más espacio para el emoji y el prefijo *** */
-    }
+.form-group input[type="tel"] {
+    /* Se mantiene el height y line-height de 54px para el centrado vertical */
+    margin-bottom: 0; /* Eliminamos el margen duplicado del estilo general */
+    /* CLAVE: Quitamos el borde izquierdo y radio para que el prefijo lo reemplace visualmente */
+    border-left: none; 
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    /* CLAVE: Espacio para el prefijo + bandera. Ajuste a 125px */
+    padding-left: 125px; 
+}
 
 /* Estilo para el elemento que contendrá el emoji y prefijo */
 /* **MODIFICADO para asegurar que las esquinas coincidan con el input** */
