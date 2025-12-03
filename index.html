@@ -342,28 +342,50 @@
         const mainContainer = document.getElementById('main-container');
         const mensajeExito = document.getElementById('mensaje-exito');
 
-        formulario.addEventListener('submit', function(event) {
-            // Detiene el envío normal del formulario
-            event.preventDefault();
+formulario.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-            // Oculta todo el contenido principal y muestra la imagen de agradecimiento
-            mainContainer.style.display = 'none';
-            mensajeExito.style.display = 'block';
+    // ✅ Capturar campos obligatorios
+    const nombre = document.getElementById('nombre').value.trim();
+    const pais = document.getElementById('pais').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
 
-            // Desplaza la página al inicio de forma suave
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+    // ✅ Validación campo por campo
+    if (nombre === "") {
+        alert("Escribe tu nombre");
+        document.getElementById("nombre").focus();
+        return;
+    }
 
-            // Envía los datos a Google Sheets usando la API Fetch
-            const formData = new FormData(formulario);
-            const scriptURL = formulario.getAttribute('action');
+    if (pais === "") {
+        alert("Escribe tu país");
+        document.getElementById("pais").focus();
+        return;
+    }
 
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(response => console.log('Envío exitoso!', response))
-                .catch(error => console.error('Error!', error));
-        });
+    if (telefono === "") {
+        alert("Escribe tu teléfono");
+        document.getElementById("telefono").focus();
+        return;
+    }
+
+    // ✅ Si pasó validación, continúa
+    mainContainer.style.display = 'none';
+    mensajeExito.style.display = 'block';
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+
+    const formData = new FormData(formulario);
+    const scriptURL = formulario.getAttribute('action');
+
+    fetch(scriptURL, { method: 'POST', body: formData })
+        .then(response => console.log('Envío exitoso!', response))
+        .catch(error => console.error('Error!', error));
+});
+
     });
 </script>
 
