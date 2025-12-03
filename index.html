@@ -272,39 +272,32 @@
             </div>
 
 <div class="form-group">
-    <label for="pais">2️⃣ ¿De qué país nos visitas?<span class="required-asterisk">*</span></label>
+                <label for="pais">2️⃣ ¿De qué país nos visitas?<span class="required-asterisk">*</span></label>
+                <select id="pais" name="pais" required>
+                    <option value="" data-prefijo="">Selecciona tu país</option>
+                    <option value="colombia" data-prefijo="🇨🇴 +57">🇨🇴 Colombia</option>
+                    <option value="mexico" data-prefijo="🇲🇽 +52">🇲🇽 México</option>
+                    <option value="peru" data-prefijo="🇵🇪 +51">🇵🇪 Perú</option>
+                    <option value="ecuador" data-prefijo="🇪🇨 +593">🇪🇨 Ecuador</option>
+                    <option value="chile" data-prefijo="🇨🇱 +56">🇨🇱 Chile</option>
+                    <option value="bolivia" data-prefijo="🇧🇴 +591">🇧🇴 Bolivia</option>
+                    <option value="guatemala" data-prefijo="🇬🇹 +502">🇬🇹 Guatemala</option>
+                    <option value="elsalvador" data-prefijo="🇸🇻 +503">🇸🇻 El Salvador</option>
+                    <option value="argentina" data-prefijo="🇦🇷 +54">🇦🇷 Argentina</option>
+                    <option value="venezuela" data-prefijo="🇻🇪 +58">🇻🇪 Venezuela</option>
+                    <option value="honduras" data-prefijo="🇭🇳 +504">🇭🇳 Honduras</option>
+                    <option value="uruguay" data-prefijo="🇺🇾 +598">🇺🇾 Uruguay</option>
+                    <option value="costarica" data-prefijo="🇨🇷 +506">🇨🇷 Costa Rica</option>
+                </select>
+            </div>
 
-    <select id="pais" name="pais" required style="
-        font-size: 20px;
-        height: 60px;
-        padding: 13px;
-        border-radius: 10px;
-        width: 100%;
-    ">
-        <option value="" data-prefijo="">Selecciona tu país</option>
-        <option value="colombia" data-prefijo="🇨🇴 +57">🇨🇴 Colombia</option>
-        <option value="mexico" data-prefijo="🇲🇽 +52">🇲🇽 México</option>
-        <option value="peru" data-prefijo="🇵🇪 +51">🇵🇪 Perú</option>
-        <option value="ecuador" data-prefijo="🇪🇨 +593">🇪🇨 Ecuador</option>
-        <option value="chile" data-prefijo="🇨🇱 +56">🇨🇱 Chile</option>
-        <option value="bolivia" data-prefijo="🇧🇴 +591">🇧🇴 Bolivia</option>
-        <option value="guatemala" data-prefijo="🇬🇹 +502">🇬🇹 Guatemala</option>
-        <option value="elsalvador" data-prefijo="🇸🇻 +503">🇸🇻 El Salvador</option>
-        <option value="argentina" data-prefijo="🇦🇷 +54">🇦🇷 Argentina</option>
-        <option value="venezuela" data-prefijo="🇻🇪 +58">🇻🇪 Venezuela</option>
-        <option value="honduras" data-prefijo="🇭🇳 +504">🇭🇳 Honduras</option>
-        <option value="uruguay" data-prefijo="🇺🇾 +598">🇺🇾 Uruguay</option>
-        <option value="costarica" data-prefijo="🇨🇷 +506">🇨🇷 Costa Rica</option>
-    </select>
-</div>
-
-<div class="form-group">
-                <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
-                <div class="phone-input-container">
-                    <span id="flag-prefix-display"></span>
-                    <input type="tel" id="telefono" name="telefono" required>
-                </div>
-            </div>
+            <div class="form-group">
+                <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
+                <div class="phone-input-container">
+                    <span id="flag-prefix-display"></span>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎<span class="required-asterisk">*</span></label>
@@ -401,137 +394,136 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const formulario = document.getElementById("miFormulario");
-    const paisSelect = document.getElementById("pais");
-    const telefonoInput = document.getElementById("telefono");
-    const prefixDisplay = document.getElementById("flag-prefix-display");
-    const submitButton = formulario.querySelector(".submit-button");
+    const formulario = document.getElementById("miFormulario");
+    const paisSelect = document.getElementById("pais");
+    const telefonoInput = document.getElementById("telefono");
+    const prefixDisplay = document.getElementById("flag-prefix-display");
+    const submitButton = formulario.querySelector(".submit-button");
 
-    // Definición de formatos, incluye REGEX para validación.
-    const formatos = {
-        colombia: { prefijo: "+57", placeholder: "3XX XXX XXXX", regex: /^3\d{9}$/, cleanedLength: 10 },
-        mexico: { prefijo: "+52", placeholder: "XX XXXX XXXX", regex: /^\d{10}$/, cleanedLength: 10 },
-        peru: { prefijo: "+51", placeholder: "9XX XXX XXX", regex: /^9\d{8}$/, cleanedLength: 9 },
-        ecuador: { prefijo: "+593", placeholder: "9XX XXX XXX", regex: /^09\d{8}$/, cleanedLength: 10 },
-        chile: { prefijo: "+56", placeholder: "9 XXXX XXXX", regex: /^9\d{8}$/, cleanedLength: 9 },
-        bolivia: { prefijo: "+591", placeholder: "7XX XXXX", regex: /^[67]\d{7}$/, cleanedLength: 8 },
-        guatemala: { prefijo: "+502", placeholder: "XXXX XXXX", regex: /^[3-5]\d{7}$/, cleanedLength: 8 },
-        elsalvador: { prefijo: "+503", placeholder: "XXXX XXXX", regex: /^[6-7]\d{7}$/, cleanedLength: 8 },
-        argentina: { prefijo: "+54", placeholder: "9 XX XXXX XXXX", regex: /^9\d{10}$/, cleanedLength: 11 },
-        venezuela: { prefijo: "+58", placeholder: "4XX XXX XXXX", regex: /^4\d{9}$/, cleanedLength: 10 },
-        honduras: { prefijo: "+504", placeholder: "XXXX XXXX", regex: /^[389]\d{7}$/, cleanedLength: 8 },
-        uruguay: { prefijo: "+598", placeholder: "9 XXXX XXXX", regex: /^9\d{7}$/, cleanedLength: 8 },
-        costarica: { prefijo: "+506", placeholder: "XXXX XXXX", regex: /^[6-8]\d{7}$/, cleanedLength: 8 },
-        default: { prefijo: "", placeholder: "Tu número de teléfono", regex: /^\d{5,15}$/, cleanedLength: null }
-    };
+    // Definición de formatos, incluye REGEX para validación.
+    const formatos = {
+        colombia: { prefijo: "+57", placeholder: "3XX XXX XXXX", regex: /^3\d{9}$/ },
+        mexico: { prefijo: "+52", placeholder: "XX XXXX XXXX", regex: /^\d{10}$/ },
+        peru: { prefijo: "+51", placeholder: "9XX XXX XXX", regex: /^9\d{8}$/ },
+        ecuador: { prefijo: "+593", placeholder: "9XX XXX XXX", regex: /^0?9\d{8}$/ }, // Permite o no el 0 inicial
+        chile: { prefijo: "+56", placeholder: "9 XXXX XXXX", regex: /^9\d{8}$/ },
+        bolivia: { prefijo: "+591", placeholder: "7XX XXXX", regex: /^[67]\d{7}$/ },
+        guatemala: { prefijo: "+502", placeholder: "XXXX XXXX", regex: /^[3-5]\d{7}$/ },
+        elsalvador: { prefijo: "+503", placeholder: "XXXX XXXX", regex: /^[6-7]\d{7}$/ },
+        argentina: { prefijo: "+54", placeholder: "9 XX XXXX XXXX", regex: /^9\d{10}$/ },
+        venezuela: { prefijo: "+58", placeholder: "4XX XXX XXXX", regex: /^4\d{9}$/ },
+        honduras: { prefijo: "+504", placeholder: "XXXX XXXX", regex: /^[389]\d{7}$/ },
+        uruguay: { prefijo: "+598", placeholder: "9 XXXX XXXX", regex: /^9\d{7}$/ },
+        costarica: { prefijo: "+506", placeholder: "XXXX XXXX", regex: /^[6-8]\d{7}$/ },
+        default: { prefijo: "", placeholder: "Tu número de teléfono", regex: /^\d{5,15}$/ }
+    };
 
-    // Función principal para actualizar el input al cambiar el país
-    function updatePhoneInput() {
-        const selectedOption = paisSelect.options[paisSelect.selectedIndex];
-        const countryCode = selectedOption.value;
-        const prefixDisplayValue = selectedOption.getAttribute('data-prefijo') || '';
-        const format = formatos[countryCode] || formatos.default;
+    // Función principal para actualizar el input al cambiar el país
+    function updatePhoneInput() {
+        const selectedOption = paisSelect.options[paisSelect.selectedIndex];
+        const countryCode = selectedOption.value;
+        const prefixDisplayValue = selectedOption.getAttribute('data-prefijo') || '';
+        const format = formatos[countryCode] || formatos.default;
 
-        // 1. Actualiza el prefijo visual
-        prefixDisplay.textContent = prefixDisplayValue;
+        // 1. Actualiza el prefijo visual
+        prefixDisplay.textContent = prefixDisplayValue;
 
-        // 2. Actualiza el placeholder (Aunque lo hayamos quitado en HTML, es bueno tenerlo como fallback o para referencia)
-        telefonoInput.placeholder = format.placeholder;
+        // 2. Actualiza el placeholder
+        telefonoInput.placeholder = format.placeholder;
 
-        // 3. Limpia el valor y fuerza la re-validación
-        validatePhone(true);
-    }
+        // 3. Limpia el valor y fuerza la re-validación
+        validatePhone(true);
+    }
 
-    // Función para limpiar el input y validar
-    function validatePhone(clearInput = false) {
-        // Limpia solo dígitos (no permitimos el signo + en el input directo)
-        let cleanedNumber = telefonoInput.value.replace(/\D/g, '');
-        telefonoInput.value = cleanedNumber;
+    // Función para limpiar el input y validar
+    function validatePhone() {
+        // Limpia solo dígitos (no permitimos el signo + en el input directo)
+        let cleanedNumber = telefonoInput.value.replace(/\D/g, '');
+        telefonoInput.value = cleanedNumber;
 
-        const countryCode = paisSelect.value;
-        const format = formatos[countryCode] || formatos.default;
+        const countryCode = paisSelect.value;
+        const format = formatos[countryCode] || formatos.default;
 
-        // Validación visual: si existe un formato, verifica el REGEX
-        if (format && format.regex) {
-            if (format.regex.test(cleanedNumber)) {
-                telefonoInput.style.border = '1px solid green';
-            } else {
-                telefonoInput.style.border = '1px solid red';
-            }
-        } else {
-            // Si no hay país seleccionado, volvemos al estilo por defecto
-            telefonoInput.style.border = '1px solid black';
-        }
-    }
+        // Validación visual: si existe un formato, verifica el REGEX
+        if (countryCode && format && format.regex) {
+            if (format.regex.test(cleanedNumber)) {
+                telefonoInput.style.border = '1px solid green';
+            } else {
+                telefonoInput.style.border = '1px solid red';
+            }
+        } else {
+            // Si no hay país seleccionado, volvemos al estilo por defecto
+            telefonoInput.style.border = '1px solid black';
+        }
+    }
 
-    // EVENT LISTENERS
-    // 1. Al cambiar el país
-    paisSelect.addEventListener("change", updatePhoneInput);
+    // EVENT LISTENERS
+    // 1. Al cambiar el país
+    paisSelect.addEventListener("change", updatePhoneInput);
 
-    // 2. Al escribir en el input de teléfono
-    telefonoInput.addEventListener("input", validatePhone);
+    // 2. Al escribir en el input de teléfono
+    telefonoInput.addEventListener("input", validatePhone);
 
-    // Inicializar el input con el valor por defecto si existe, o limpiar.
-    updatePhoneInput();
+    // Inicializar el input con el valor por defecto si existe, o limpiar.
+    updatePhoneInput();
 
-    // 3. Manejo del Submit del Formulario
-    formulario.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const countryCode = paisSelect.value;
-        const format = formatos[countryCode];
-        let cleanedNumber = telefonoInput.value.replace(/\D/g, '');
-        
-        // VALIDACIÓN FINAL
-        if (!countryCode) {
-            alert("Por favor, selecciona tu país.");
-            paisSelect.focus();
-            return;
-        }
+    // 3. Manejo del Submit del Formulario
+    formulario.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const countryCode = paisSelect.value;
+        const format = formatos[countryCode];
+        let cleanedNumber = telefonoInput.value.replace(/\D/g, '');
+        
+        // VALIDACIÓN FINAL
+        if (!countryCode) {
+            alert("Por favor, selecciona tu país.");
+            paisSelect.focus();
+            return;
+        }
 
-        if (!format || !format.regex.test(cleanedNumber)) {
-            alert("El número de teléfono no es válido para " + paisSelect.options[paisSelect.selectedIndex].text.trim());
-            telefonoInput.focus();
-            return;
-        }
+        if (!format || !format.regex.test(cleanedNumber)) {
+            alert("El número de teléfono no es válido para " + paisSelect.options[paisSelect.selectedIndex].text.trim());
+            telefonoInput.focus();
+            return;
+        }
 
-        // Limpia el número antes de enviarlo
-        const finalPhoneNumber = format.prefijo + cleanedNumber;
-        
-        // Crea un campo oculto para enviar el número completo (prefijo + número limpio)
-        let hiddenInput = document.createElement("input");
-        hiddenInput.type = "hidden";
-        hiddenInput.name = "telefono_completo"; // Nuevo campo para enviar a la hoja de cálculo
-        hiddenInput.value = finalPhoneNumber;
-        formulario.appendChild(hiddenInput);
+        // --- PREPARACIÓN FINAL PARA EL ENVÍO ---
+        // Construye el número final con prefijo para el envío
+        const finalPhoneNumber = format.prefijo + cleanedNumber;
+        
+        // Creamos un campo oculto para enviar el número con prefijo a la hoja de cálculo
+        let hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "telefono"; // Usamos el nombre 'telefono' para que Google Sheets lo capture
+        hiddenInput.value = finalPhoneNumber;
+        formulario.appendChild(hiddenInput);
 
-        // Sobreescribe el campo de teléfono original (opcional, pero puede ser útil si el script de Google busca "telefono")
-        telefonoInput.value = finalPhoneNumber;
+        // Proceder con el envío
+        const formData = new FormData(formulario);
+        submitButton.disabled = true;
+        submitButton.textContent = "Enviando...";
 
-
-        // Proceder con el envío
-        const formData = new FormData(formulario);
-        submitButton.disabled = true;
-        submitButton.textContent = "Enviando...";
-
-        fetch(formulario.action, {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                document.getElementById("main-container").style.display = 'none';
-                document.getElementById("mensaje-exito").style.display = 'block';
-            } else {
-                throw new Error('Error al enviar el formulario.');
-            }
-        })
-        .catch(error => {
-            alert('Hubo un error al enviar el formulario. Intenta de nuevo.');
-            console.error('Error:', error);
-            submitButton.disabled = false;
-            submitButton.textContent = "Enviar Respuesta";
-        });
-    });
+        fetch(formulario.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Mostrar mensaje de éxito
+                document.getElementById("main-container").style.display = 'none';
+                document.getElementById("mensaje-exito").style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                throw new Error('Error al enviar el formulario.');
+            }
+        })
+        .catch(error => {
+            alert('Hubo un error al enviar el formulario. Intenta de nuevo.');
+            console.error('Error:', error);
+            submitButton.disabled = false;
+            submitButton.textContent = "Enviar Respuesta";
+        });
+    });
 });
 </script>
 
