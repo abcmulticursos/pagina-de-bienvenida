@@ -198,33 +198,35 @@
         height: 54px;
     }
 
-    /* El campo de input en sí */
+/* El campo de input en sí */
     .form-group input[type="tel"] {
         /* Se mantiene el height y line-height de 54px para el centrado vertical */
         margin-bottom: 0; /* Eliminamos el margen duplicado del estilo general */
         /* Añadimos padding a la izquierda para que el texto NO se superponga con la bandera/prefijo */
-        padding-left: 120px; /* Espacio suficiente para la bandera y el prefijo */
+        padding-left: 135px; /* *** AUMENTADO: Da más espacio para el emoji y el prefijo *** */
     }
 
 /* Estilo para el elemento que contendrá el emoji y prefijo */
-    /* **MODIFICADO para mostrarlo DENTRO del input, sin borde** */
-    #flag-prefix-display {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 54px;
-        line-height: 54px; /* Centra verticalmente (necesita un padding superior e inferior de 0) */
-        padding: 0 10px;
-        color: black;
-        font-size: 19px;
-        font-weight: normal;
-        pointer-events: none; /* Permite hacer clic en el input detrás */
-        background: transparent;
-        z-index: 10;
-        border-right: none; /* ELIMINADO: No queremos borde separador */
-        /* Asegura que el texto no se envuelva */
-        white-space: nowrap; 
-    }
+/* **MODIFICADO para asegurar que las esquinas coincidan con el input** */
+#flag-prefix-display {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 54px;
+    line-height: 54px; /* Centra verticalmente */
+    padding: 0 10px;
+    color: black;
+    font-size: 19px;
+    font-weight: normal;
+    pointer-events: none;
+    background: transparent;
+    z-index: 10;
+    border-right: none;
+    white-space: nowrap;
+    /* Copiamos el radio de borde del input subyacente para la esquina izquierda */
+    border-top-left-radius: 5px; 
+    border-bottom-left-radius: 5px;
+}
 </style>
 </head>
 <body>
