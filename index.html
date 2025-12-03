@@ -401,31 +401,31 @@ inputPrefijo.value = prefijo;
             let maxLength = 15; // Valor seguro por defecto
             
             switch (paisValor) {
-case 'Peru':
-                case 'Colombia':
-                case 'Chile':
-                case 'Ecuador':
-                case 'Uruguay': 
-                case 'Paraguay': // ¡Añadido! Usa 9 dígitos
+case 'Peru': // Perú: 9 dígitos
+                case 'Uruguay': // Uruguay: 9 dígitos
+                case 'Paraguay': // Paraguay: 9 dígitos
                     minLength = 9;
                     maxLength = 9;
                     break;
                 
-                case 'Mexico': 
-                case 'Argentina':
-                case 'Venezuela':
-                case 'Bolivia': 
-                case 'Republica-Dominicana': // ¡Añadido! Usa 10 dígitos
+                case 'Mexico': // México: 10 dígitos
+                case 'Argentina': // Argentina: 10 dígitos
+                case 'Venezuela': // Venezuela: 10 dígitos
+                case 'Bolivia': // Bolivia: 10 dígitos
+                case 'Colombia': // Colombia: 10 dígitos
+                case 'Chile': // Chile: 10 dígitos
+                case 'Ecuador': // Ecuador: 10 dígitos
+                case 'Republica-Dominicana': // Rep. Dominicana: 10 dígitos
                     minLength = 10;
                     maxLength = 10;
                     break;
 
-                case 'Guatemala':
-                case 'El-Salvador':
-                case 'Honduras':
-                case 'Costa-Rica': 
-                case 'Panama': // ¡Añadido! Usa 8 dígitos
-                case 'Nicaragua': // ¡Añadido! Usa 8 dígitos
+                case 'Guatemala': // Guatemala: 8 dígitos
+                case 'El-Salvador': // El Salvador: 8 dígitos
+                case 'Honduras': // Honduras: 8 dígitos
+                case 'Costa-Rica': // Costa Rica: 8 dígitos
+                case 'Panama': // Panamá: 8 dígitos
+                case 'Nicaragua': // Nicaragua: 8 dígitos
                     minLength = 8;
                     maxLength = 8;
                     break;
