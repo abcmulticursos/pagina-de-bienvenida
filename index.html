@@ -307,7 +307,7 @@
 <div class="form-group">
     <label for="telefono_numero">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
     <div class="phone-input-container">
-        <input type="text" id="prefijo" name="prefijo_display" class="prefix-input" value="-- ---" readonly tabindex="-1"> 
+<input type="text" id="prefijo" name="prefijo_display" class="prefix-input" value="---" readonly tabindex="-1">
         <input type="tel" id="telefono_numero" name="telefono_numero" placeholder="Número de Teléfono" required pattern="[0-9]*" inputmode="numeric" maxlength="15">
         <input type="hidden" id="telefono_completo" name="telefono_completo">
     </div>
@@ -425,8 +425,8 @@
             const paisValor = selectedOption.value;
             const bandera = selectedOption.text.split(' ')[0];
             
-            // Muestra la bandera y el prefijo en el input de prefijo
-            inputPrefijo.value = bandera + ' ' + prefijo;
+// Muestra SOLO el prefijo numérico en el input de prefijo
+inputPrefijo.value = prefijo;
 
             // Lógica de Validación de Longitud (mínimo y máximo)
             let minLength = 7;
@@ -492,7 +492,7 @@
             event.preventDefault();
 
             // 1. ANTES DE ENVIAR: Combina el prefijo y el número en el campo oculto
-            const prefijo = inputPrefijo.value.split(' ')[1]; // Obtiene solo el código (+51, +57, etc.)
+       const prefijo = inputPrefijo.value.trim(); // Obtiene el código (+51, +57, etc.) directamente
             const numero = inputTelefono.value.trim();
             
             // Limpia el número de espacios o guiones antes de combinar
