@@ -185,9 +185,45 @@
         transition: background-color 0.3s;
     }
 
-    .whatsapp-button:hover {
-        background-color: #128C7E;
-    }
+.whatsapp-button:hover {
+        background-color: #128C7E;
+    }
+
+/* *** ESTILOS CLAVE AÑADIDOS/MODIFICADOS PARA EL INPUT DE TELÉFONO *** */
+    /* Contenedor del campo de teléfono */
+    .phone-input-container {
+        position: relative;
+        width: 100%; 
+        margin-bottom: 30px; /* Para mantener el espaciado entre preguntas */
+        height: 54px;
+    }
+
+    /* El campo de input en sí */
+    .form-group input[type="tel"] {
+        /* Se mantiene el height y line-height de 54px para el centrado vertical */
+        margin-bottom: 0; /* Eliminamos el margen duplicado del estilo general */
+        /* Añadimos padding a la izquierda para que el texto NO se superponga con la bandera/prefijo */
+        padding-left: 120px; /* Espacio suficiente para la bandera y el prefijo */
+    }
+
+    /* Estilo para el elemento que contendrá el emoji y prefijo */
+    #flag-prefix-display {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 54px;
+        line-height: 54px; /* Centra verticalmente */
+        padding: 0 10px;
+        color: black;
+        font-size: 19px;
+        font-weight: normal;
+        pointer-events: none; /* Permite hacer clic en el input detrás */
+        background: transparent;
+        z-index: 10;
+        border-right: 1px solid #ccc; 
+        /* Asegura que el texto no se envuelva */
+        white-space: nowrap; 
+    }
 </style>
 </head>
 <body>
@@ -234,15 +270,29 @@
                 <input type="text" id="nombre" name="nombre" placeholder="Tu respuesta" required>
             </div>
 
-            <div class="form-group">
-                <label for="pais">2️⃣ ¿De qué pais nos visitas? 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹<span class="required-asterisk">*</span></label>
-                <input type="text" id="pais" name="pais" placeholder="Tu respuesta" required>
-            </div>
+<div class="form-group">
+                <label for="pais">2️⃣ ¿De qué pais nos visitas? 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹<span class="required-asterisk">*</span></label>
+                <select id="pais" name="pais" required onchange="updatePhoneInput()">
+                    <option value="" disabled selected hidden>Selecciona un país</option>
+                    <option value="Perú" data-prefijo="+51" data-bandera="🇵🇪">Perú 🇵🇪 (+51)</option>
+                    <option value="Colombia" data-prefijo="+57" data-bandera="🇨🇴">Colombia 🇨🇴 (+57)</option>
+                    <option value="Ecuador" data-prefijo="+593" data-bandera="🇪🇨">Ecuador 🇪🇨 (+593)</option>
+                    <option value="México" data-prefijo="+52" data-bandera="🇲🇽">México 🇲🇽 (+52)</option>
+                    <option value="Chile" data-prefijo="+56" data-bandera="🇨🇱">Chile 🇨🇱 (+56)</option>
+                    <option value="Bolivia" data-prefijo="+591" data-bandera="🇧🇴">Bolivia 🇧🇴 (+591)</option>
+                    <option value="Guatemala" data-prefijo="+502" data-bandera="🇬🇹">Guatemala 🇬🇹 (+502)</option>
+                    <option value="Otro País" data-prefijo="" data-bandera="🌎">Otro País 🌎</option>
+                </select>
+            </div>
 
-            <div class="form-group">
-                <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
-                <input type="tel" id="telefono" name="telefono" placeholder="Tu respuesta" required>
-            </div>
+            <div class="form-group">
+                <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
+                <div class="phone-input-container">
+                    <span id="flag-prefix-display"></span>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Número de Teléfono" required pattern="[0-9]*" inputmode="numeric">
+                </div>
+                                <input type="hidden" id="telefono_completo" name="telefono_completo">
+            </div>
 
             <div class="form-group">
                 <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎<span class="required-asterisk">*</span></label>
@@ -337,13 +387,104 @@
 </div>
 
 <script>
+    // *** LÓGICA DE VALIDACIÓN Y FORMATO DE TELÉFONO ***
+
+    // 1. Objeto que define el formato (mínimo/máximo de dígitos) por país.
+    const formatos = {
+        'Perú': { min: 9, max: 9, placeholder: 'Ej: 987654321' },
+        'Colombia': { min: 10, max: 10, placeholder: 'Ej: 3001234567' },
+        'Ecuador': { min: 9, max: 9, placeholder: 'Ej: 987654321' },
+        'México': { min: 10, max: 10, placeholder: 'Ej: 5512345678' },
+        'Chile': { min: 9, max: 9, placeholder: 'Ej: 987654321' },
+        'Bolivia': { min: 8, max: 8, placeholder: 'Ej: 71234567' },
+        'Guatemala': { min: 8, max: 8, placeholder: 'Ej: 51234567' },
+        'Otro País': { min: 6, max: 15, placeholder: 'Ingresa tu número (sin código de área)' }
+    };
+
+    // 2. Función para actualizar la bandera y el prefijo
+    function updatePhoneInput() {
+        const paisSelect = document.getElementById('pais');
+        const display = document.getElementById('flag-prefix-display');
+        const telefonoInput = document.getElementById('telefono');
+        const selectedOption = paisSelect.options[paisSelect.selectedIndex];
+
+        const prefijo = selectedOption.getAttribute('data-prefijo');
+        const bandera = selectedOption.getAttribute('data-bandera');
+        const pais = selectedOption.value;
+
+        if (prefijo) {
+            display.textContent = `${bandera} ${prefijo}`;
+            display.style.display = 'block'; // Asegura que se muestre
+        } else {
+            display.textContent = '';
+            display.style.display = 'none'; // Oculta si no hay prefijo (ej: "Otro País" si prefijo está vacío)
+        }
+
+        // Aplicar la validación de longitud y placeholder
+        const formato = formatos[pais] || { min: 6, max: 15, placeholder: 'Número de Teléfono' };
+        
+        telefonoInput.setAttribute('minlength', formato.min);
+        telefonoInput.setAttribute('maxlength', formato.max);
+        telefonoInput.placeholder = formato.placeholder;
+
+        // Limpiar el input de teléfono si cambiamos de país
+        telefonoInput.value = '';
+    }
+
+    // Asegurar que la función se ejecute al cargar para inicializar el campo si hay un país por defecto (Aunque el select tiene "disabled selected hidden")
+    // Se añade un pequeño retardo para asegurar que el DOM se haya cargado completamente
+    window.addEventListener('load', function() {
+        // Inicializar el campo (se ejecutará con el valor 'Selecciona un país', mostrando vacío o nada)
+        // Pero es necesario para que la función sea conocida globalmente por onchange="updatePhoneInput()"
+    });
+
+    // 3. Lógica principal del formulario (AJUSTADA)
     document.addEventListener('DOMContentLoaded', function() {
         const formulario = document.getElementById('miFormulario');
         const mainContainer = document.getElementById('main-container');
         const mensajeExito = document.getElementById('mensaje-exito');
+        const paisSelect = document.getElementById('pais');
+        const telefonoInput = document.getElementById('telefono');
+        const telefonoCompletoInput = document.getElementById('telefono_completo');
+        
+        // Inicializa el campo de teléfono al cargar la página.
+        updatePhoneInput(); 
+        
+        // Asignar la función al evento onchange del select de país (aunque ya está en el HTML)
+        paisSelect.addEventListener('change', updatePhoneInput); 
 
         formulario.addEventListener('submit', function(event) {
-            // Detiene el envío normal del formulario
+            
+            // 1. Validar la longitud del teléfono ANTES de detener el evento
+            const selectedOption = paisSelect.options[paisSelect.selectedIndex];
+            const pais = selectedOption.value;
+            const formato = formatos[pais] || { min: 6, max: 15 };
+            const telefonoNumero = telefonoInput.value.trim();
+            
+            // Validar que se haya seleccionado un país y el número sea correcto
+            if (pais === "") {
+                alert('Por favor, selecciona tu país (pregunta 2).');
+                event.preventDefault();
+                return;
+            }
+
+            if (telefonoNumero.length < formato.min || telefonoNumero.length > formato.max) {
+                alert(`El número de teléfono para ${pais} debe tener entre ${formato.min} y ${formato.max} dígitos.`);
+                event.preventDefault();
+                return;
+            }
+
+            // 2. Ensamblar el número de teléfono completo (prefijo + número)
+            const prefijo = selectedOption.getAttribute('data-prefijo');
+            
+            // Si hay prefijo, lo usamos. Si no, usamos solo el número (para "Otro País" si no se proporciona prefijo)
+            const telefonoFinal = prefijo ? prefijo + telefonoNumero : telefonoNumero;
+            
+            // 3. Asignar el valor final al campo oculto que se enviará al Google Sheet
+            telefonoCompletoInput.value = telefonoFinal;
+
+
+            // Detiene el envío normal del formulario (ESTO DEBE IR DESPUÉS DE LA VALIDACIÓN)
             event.preventDefault();
 
             // Oculta todo el contenido principal y muestra la imagen de agradecimiento
@@ -364,6 +505,9 @@
                 .then(response => console.log('Envío exitoso!', response))
                 .catch(error => console.error('Error!', error));
         });
+        
+        // Se asegura de que updatePhoneInput sea global para que el onchange del select lo encuentre
+        window.updatePhoneInput = updatePhoneInput;
     });
 </script>
 
