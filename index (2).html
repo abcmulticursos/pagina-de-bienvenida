@@ -185,9 +185,26 @@
         transition: background-color 0.3s;
     }
 
-    .whatsapp-button:hover {
-        background-color: #128C7E;
-    }
+.whatsapp-button:hover {
+        background-color: #128C7E;
+    }
+
+/* *** ESTILOS CLAVE CORREGIDOS PARA EL INPUT DE TELÉFONO *** */
+
+/* Contenedor del campo de teléfono (QUITAMOS FLEX PARA UN SOLO CAMPO) */
+.phone-input-container {
+    margin-bottom: 30px; /* Separación después del grupo de teléfono (copiando el margin-bottom general) */
+}
+
+/* Estilo para el input del número de teléfono (AJUSTADO) */
+.form-group input[type="tel"] {
+    /* ANCHO CORREGIDO: 100% */
+    width: 100%;  /* ¡ESTE ES EL CAMBIO CLAVE PARA QUE SE VEA UNO SOLO! */
+    padding-left: 10px;
+    /* Aseguramos que herede el estilo general de input */
+    /* ... el resto de estilos ... */
+}
+
 </style>
 </head>
 <body>
@@ -234,15 +251,35 @@
                 <input type="text" id="nombre" name="nombre" placeholder="Tu respuesta" required>
             </div>
 
-            <div class="form-group">
-                <label for="pais">2️⃣ ¿De qué pais nos visitas? 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹<span class="required-asterisk">*</span></label>
-                <input type="text" id="pais" name="pais" placeholder="Tu respuesta" required>
-            </div>
+<div class="form-group">
+    <label for="pais">2️⃣ ¿De qué país nos visitas? 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹<span class="required-asterisk">*</span></label>
+    <select id="pais" name="pais" required>
+        <option value="" disabled selected hidden>Selecciona tu País</option>
+        <option value="Colombia" data-prefijo="+57">🇨🇴 Colombia (+57)</option>
+        <option value="Mexico" data-prefijo="+52">🇲🇽 México (+52)</option>
+        <option value="Peru" data-prefijo="+51">🇵🇪 Perú (+51)</option>
+        <option value="Ecuador" data-prefijo="+593">🇪🇨 Ecuador (+593)</option>
+        <option value="Chile" data-prefijo="+56">🇨🇱 Chile (+56)</option>
+        <option value="Bolivia" data-prefijo="+591">🇧🇴 Bolivia (+591)</option>
+        <option value="Guatemala" data-prefijo="+502">🇬🇹 Guatemala (+502)</option>
+        <option value="El-Salvador" data-prefijo="+503">🇸🇻 El Salvador (+503)</option>
+        <option value="Argentina" data-prefijo="+54">🇦🇷 Argentina (+54)</option>
+        <option value="Venezuela" data-prefijo="+58">🇻🇪 Venezuela (+58)</option>
+        <option value="Honduras" data-prefijo="+504">🇭🇳 Honduras (+504)</option>
+        <option value="Uruguay" data-prefijo="+598">🇺🇾 Uruguay (+598)</option>
+        <option value="Costa-Rica" data-prefijo="+506">🇨🇷 Costa Rica (+506)</option>
+        <option value="Otro-pais" data-prefijo="--">🌎 Otro país</option>
+    </select>
+</div>
 
-            <div class="form-group">
-                <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
-                <input type="tel" id="telefono" name="telefono" placeholder="Tu respuesta" required>
-            </div>
+<div class="form-group">
+    <label for="telefono_numero">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
+    <div class="phone-input-container">
+                <input type="hidden" id="prefijo" name="prefijo_display" class="prefix-input" value="---" readonly tabindex="-1">
+        <input type="tel" id="telefono_numero" name="telefono_numero" placeholder="Número de Teléfono" required pattern="[0-9]*" inputmode="numeric" maxlength="15">
+        <input type="hidden" id="telefono_completo" name="telefono_completo">
+    </div>
+</div>
 
             <div class="form-group">
                 <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎<span class="required-asterisk">*</span></label>
@@ -341,22 +378,117 @@
         const formulario = document.getElementById('miFormulario');
         const mainContainer = document.getElementById('main-container');
         const mensajeExito = document.getElementById('mensaje-exito');
+        
+        // Elementos de País y Teléfono (NUEVAS CONSTANTES)
+        const selectPais = document.getElementById('pais');
+        const inputPrefijo = document.getElementById('prefijo');
+        const inputTelefono = document.getElementById('telefono_numero'); // Cambiado a telefono_numero
+        const inputTelefonoCompleto = document.getElementById('telefono_completo');
+
+
+        // Función para actualizar el prefijo del teléfono y aplicar la validación de longitud (NUEVA FUNCIÓN)
+        function actualizarPrefijo() {
+            const selectedOption = selectPais.options[selectPais.selectedIndex];
+            const prefijo = selectedOption.getAttribute('data-prefijo') || '-- ---';
+            const paisValor = selectedOption.value;
+            const bandera = selectedOption.text.split(' ')[0];
+            
+// Muestra SOLO el prefijo numérico en el input de prefijo
+inputPrefijo.value = prefijo;
+
+            // Lógica de Validación de Longitud (mínimo y máximo)
+            let minLength = 7;
+            let maxLength = 15; // Valor seguro por defecto
+            
+            switch (paisValor) {
+case 'Peru': // Perú: 9 dígitos
+                case 'Uruguay': // Uruguay: 9 dígitos
+                case 'Paraguay': // Paraguay: 9 dígitos
+                    minLength = 9;
+                    maxLength = 9;
+                    break;
+                
+                case 'Mexico': // México: 10 dígitos
+                case 'Argentina': // Argentina: 10 dígitos
+                case 'Venezuela': // Venezuela: 10 dígitos
+                case 'Bolivia': // Bolivia: 10 dígitos
+                case 'Colombia': // Colombia: 10 dígitos
+                case 'Chile': // Chile: 10 dígitos
+                case 'Ecuador': // Ecuador: 10 dígitos
+                case 'Republica-Dominicana': // Rep. Dominicana: 10 dígitos
+                    minLength = 10;
+                    maxLength = 10;
+                    break;
+
+                case 'Guatemala': // Guatemala: 8 dígitos
+                case 'El-Salvador': // El Salvador: 8 dígitos
+                case 'Honduras': // Honduras: 8 dígitos
+                case 'Costa-Rica': // Costa Rica: 8 dígitos
+                case 'Panama': // Panamá: 8 dígitos
+                case 'Nicaragua': // Nicaragua: 8 dígitos
+                    minLength = 8;
+                    maxLength = 8;
+                    break;
+            }
+
+            // Aplica las restricciones de longitud al input de teléfono
+            inputTelefono.minLength = minLength;
+            inputTelefono.maxLength = maxLength;
+            
+            // Pista visual para el usuario
+            if (paisValor !== "") {
+                 inputTelefono.placeholder = `Número de Teléfono (${minLength} dígitos)`;
+            } else {
+                 inputTelefono.placeholder = `Número de Teléfono`;
+            }
+            
+            // Limpia el campo al cambiar de país para forzar la nueva validación
+            inputTelefono.value = '';
+        }
+
+
+        // Evento para cambiar el prefijo y la validación cuando se selecciona un país
+        selectPais.addEventListener('change', actualizarPrefijo);
+        
+        // Inicializar la validación al cargar si ya hay un valor seleccionado
+        actualizarPrefijo();
+
 
         formulario.addEventListener('submit', function(event) {
-            // Detiene el envío normal del formulario
             event.preventDefault();
 
-            // Oculta todo el contenido principal y muestra la imagen de agradecimiento
+            // 1. ANTES DE ENVIAR: Combina el prefijo y el número en el campo oculto
+       const prefijo = inputPrefijo.value.trim(); // Obtiene el código (+51, +57, etc.) directamente
+            const numero = inputTelefono.value.trim();
+            
+            // Limpia el número de espacios o guiones antes de combinar
+            const numeroLimpio = numero.replace(/[^0-9]/g, '');
+
+if (prefijo === '---' || prefijo === '--') {
+                 // Si es "Otro país", no se concatena el código internacional
+                 inputTelefonoCompleto.value = numeroLimpio;
+            } else {
+                 // Concatena el prefijo (ej: +57) con el número limpio
+                 inputTelefonoCompleto.value = prefijo + numeroLimpio;
+            }
+            
+            // 2. Comprobar la validación de HTML5 antes de enviar realmente
+            if (formulario.checkValidity() === false) {
+                 // Si no es válido (por ejemplo, longitud incorrecta), el navegador muestra el mensaje de error.
+                 // Detenemos el envío y mostramos el error.
+                 event.stopImmediatePropagation();
+                 return;
+            }
+
+            // 3. Envío y mensaje de éxito (si la validación pasó)
             mainContainer.style.display = 'none';
             mensajeExito.style.display = 'block';
 
-            // Desplaza la página al inicio de forma suave
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
 
-            // Envía los datos a Google Sheets usando la API Fetch
             const formData = new FormData(formulario);
             const scriptURL = formulario.getAttribute('action');
 
