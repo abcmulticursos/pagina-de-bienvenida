@@ -185,9 +185,28 @@
         transition: background-color 0.3s;
     }
 
-    .whatsapp-button:hover {
-        background-color: #128C7E;
-    }
+.whatsapp-button:hover {
+        background-color: #128C7E;
+    }
+
+/* *** ESTILOS CLAVE AÑADIDOS PARA EL INPUT DE TELÉFONO *** */
+/* Contenedor del campo de teléfono */
+.phone-input-container {
+    display: flex; /* Hacemos que los elementos internos se pongan en línea */
+    /* ... el resto del CSS que copiaste ... */
+}
+/* ... */
+.form-group input[type="tel"] {
+    width: 65%; /* Espacio restante para el número */
+    padding-left: 10px;
+    margin-bottom: 0 !important; /* Quita el margen inferior general */
+    /* Aseguramos que herede el estilo general de input */
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+    height: 54px;
+    line-height: 54px;
+}
 </style>
 </head>
 <body>
@@ -255,10 +274,14 @@
     </select>
 </div>
 
-            <div class="form-group">
-                <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
-                <input type="tel" id="telefono" name="telefono" placeholder="Tu respuesta" required>
-            </div>
+<div class="form-group">
+    <label for="telefono_numero">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
+    <div class="phone-input-container">
+        <input type="text" id="prefijo" name="prefijo_display" class="prefix-input" value="-- ---" readonly tabindex="-1"> 
+        <input type="tel" id="telefono_numero" name="telefono_numero" placeholder="Número de Teléfono" required pattern="[0-9]*" inputmode="numeric" maxlength="15">
+        <input type="hidden" id="telefono_completo" name="telefono_completo">
+    </div>
+</div>
 
             <div class="form-group">
                 <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎<span class="required-asterisk">*</span></label>
@@ -357,22 +380,119 @@
         const formulario = document.getElementById('miFormulario');
         const mainContainer = document.getElementById('main-container');
         const mensajeExito = document.getElementById('mensaje-exito');
+        
+        // Elementos de País y Teléfono (NUEVAS CONSTANTES)
+        const selectPais = document.getElementById('pais');
+        const inputPrefijo = document.getElementById('prefijo');
+        const inputTelefono = document.getElementById('telefono_numero'); // Cambiado a telefono_numero
+        const inputTelefonoCompleto = document.getElementById('telefono_completo');
+
+
+        // Función para actualizar el prefijo del teléfono y aplicar la validación de longitud (NUEVA FUNCIÓN)
+        function actualizarPrefijo() {
+            const selectedOption = selectPais.options[selectPais.selectedIndex];
+            const prefijo = selectedOption.getAttribute('data-prefijo') || '-- ---';
+            const paisValor = selectedOption.value;
+            const bandera = selectedOption.text.split(' ')[0];
+            
+            // Muestra la bandera y el prefijo en el input de prefijo
+            inputPrefijo.value = bandera + ' ' + prefijo;
+
+            // Lógica de Validación de Longitud (mínimo y máximo)
+            let minLength = 7;
+            let maxLength = 15; // Valor seguro por defecto
+            
+            switch (paisValor) {
+                case 'Peru':
+                case 'Colombia':
+                case 'Chile':
+                case 'Ecuador':
+                    minLength = 9;
+                    maxLength = 9;
+                    break;
+                case 'Mexico':
+                case 'Guatemala':
+                case 'El-Salvador':
+                case 'Honduras':
+                case 'Costa-Rica':
+                    minLength = 8;
+                    maxLength = 8;
+                    break;
+                case 'Argentina':
+                case 'Venezuela':
+                case 'Bolivia':
+                    minLength = 10;
+                    maxLength = 10;
+                    break;
+                case 'Uruguay':
+                    minLength = 9;
+                    maxLength = 9;
+                    break;
+                default:
+                    // Default para "Otro País" u otros no especificados (longitud flexible)
+                    minLength = 7;
+                    maxLength = 15;
+                    break;
+            }
+
+            // Aplica las restricciones de longitud al input de teléfono
+            inputTelefono.minLength = minLength;
+            inputTelefono.maxLength = maxLength;
+            
+            // Pista visual para el usuario
+            if (paisValor !== "") {
+                 inputTelefono.placeholder = `Número de Teléfono (${minLength} dígitos)`;
+            } else {
+                 inputTelefono.placeholder = `Número de Teléfono`;
+            }
+            
+            // Limpia el campo al cambiar de país para forzar la nueva validación
+            inputTelefono.value = '';
+        }
+
+
+        // Evento para cambiar el prefijo y la validación cuando se selecciona un país
+        selectPais.addEventListener('change', actualizarPrefijo);
+        
+        // Inicializar la validación al cargar si ya hay un valor seleccionado
+        actualizarPrefijo();
+
 
         formulario.addEventListener('submit', function(event) {
-            // Detiene el envío normal del formulario
             event.preventDefault();
 
-            // Oculta todo el contenido principal y muestra la imagen de agradecimiento
+            // 1. ANTES DE ENVIAR: Combina el prefijo y el número en el campo oculto
+            const prefijo = inputPrefijo.value.split(' ')[1]; // Obtiene solo el código (+51, +57, etc.)
+            const numero = inputTelefono.value.trim();
+            
+            // Limpia el número de espacios o guiones antes de combinar
+            const numeroLimpio = numero.replace(/[^0-9]/g, '');
+
+            if (prefijo === '--') {
+                 // Si es "Otro país", no se concatena el código internacional
+                 inputTelefonoCompleto.value = numeroLimpio;
+            } else {
+                 // Concatena el prefijo (ej: +57) con el número limpio
+                 inputTelefonoCompleto.value = prefijo + numeroLimpio;
+            }
+            
+            // 2. Comprobar la validación de HTML5 antes de enviar realmente
+            if (formulario.checkValidity() === false) {
+                 // Si no es válido (por ejemplo, longitud incorrecta), el navegador muestra el mensaje de error.
+                 // Detenemos el envío y mostramos el error.
+                 event.stopImmediatePropagation();
+                 return;
+            }
+
+            // 3. Envío y mensaje de éxito (si la validación pasó)
             mainContainer.style.display = 'none';
             mensajeExito.style.display = 'block';
 
-            // Desplaza la página al inicio de forma suave
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
 
-            // Envía los datos a Google Sheets usando la API Fetch
             const formData = new FormData(formulario);
             const scriptURL = formulario.getAttribute('action');
 
