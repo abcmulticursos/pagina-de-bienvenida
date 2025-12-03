@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-s0cale=1.0">
     <title>Bienvenida a la Comunidad</title>
 <style>
     /* --- ESTILOS GENERALES Y AJUSTABLES --- */
@@ -104,76 +104,29 @@
         margin-left: 2px;
     }
 
-/* Estilos de los campos de entrada unificados */
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        padding: 10px;
-        box-sizing: border-box;
-        border-radius: 5px;
-        border: 1px solid black;
-        background-color: white;
-        font-size: 19px;
-        font-family: Arial, sans-serif;
-        line-height: 1.2;
-        margin-bottom: 30px;
-    }
+    /* Estilos de los campos de entrada unificados */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: white;
+        font-size: 19px;
+        font-family: Arial, sans-serif;
+        line-height: 1.2;
+        margin-bottom: 30px;
+    }
 
-/* PROPIEDADES DE ALTURA ACTUALIZADAS */
-/* Regla para los campos que deben tener una altura fija de 54px */
-.form-group input,
-.form-group select {
-    height: 54px;
-}
-.form-group input:not([type="tel"]) {
-    /* Mantenemos line-height solo para inputs que no sean de teléfono */
-    line-height: 54px;
-}
-
-/* RESTAURACIÓN DE ESTILO: Para asegurar el tamaño de fuente y padding correcto en el select de país */
-.form-group select {
-    font-size: 19px; 
-    padding: 0 10px;
-    /* QUITAMOS line-height para corregir el problema de altura en el selector */
-}
-
-    /* *** ESTILOS CLAVE AÑADIDOS/MODIFICADOS PARA EL INPUT DE TELÉFONO *** */
-    /* Contenedor del campo de teléfono */
-    .phone-input-container {
-        position: relative;
-        width: 100%;
-        margin-bottom: 30px; /* Para mantener el espaciado entre preguntas */
-        height: 54px; /* Aseguramos la altura uniforme */
-    }
-
-    /* El campo de input en sí */
-    .form-group input[type="tel"] {
-        /* Usamos padding-left para que el texto NO se superponga con la bandera/prefijo */
-        padding-left: 120px; /* Espacio suficiente para la bandera y el prefijo */
-        margin-bottom: 0; /* Eliminamos el margen duplicado del input */
-        height: 54px; /* Aseguramos la altura uniforme */
-        line-height: 54px; /* Centra el texto verticalmente */
-    }
-
-    /* Estilo para el elemento que contendrá el emoji y prefijo */
-    #flag-prefix-display {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 54px;
-        line-height: 54px; /* Centra verticalmente */
-        padding: 0 10px;
-        color: black;
-        font-size: 19px;
-        font-weight: normal;
-        pointer-events: none; /* Permite hacer clic en el input detrás */
-        background: transparent;
-        z-index: 10;
-        border-right: 1px solid #ccc;
-        /* Asegura que el texto no se envuelva */
-        white-space: nowrap;
-    }
+    /* PROPIEDADES DE ALTURA ACTUALIZADAS */
+    /* Regla para los campos que deben tener una altura fija de 54px */
+    .form-group input,
+    .form-group select {
+        height: 54px;
+        line-height: 54px;
+    }
     
     /* Regla específica para el campo de mensaje largo */
     .form-group textarea#mensaje {
@@ -281,32 +234,14 @@
                 <input type="text" id="nombre" name="nombre" placeholder="Tu respuesta" required>
             </div>
 
-<div class="form-group">
-                <label for="pais">2️⃣ ¿De qué país nos visitas?<span class="required-asterisk">*</span></label>
-                <select id="pais" name="pais" required>
-                    <option value="" data-prefijo="">Selecciona tu país</option>
-                    <option value="colombia" data-prefijo="🇨🇴 +57">🇨🇴 Colombia</option>
-                    <option value="mexico" data-prefijo="🇲🇽 +52">🇲🇽 México</option>
-                    <option value="peru" data-prefijo="🇵🇪 +51">🇵🇪 Perú</option>
-                    <option value="ecuador" data-prefijo="🇪🇨 +593">🇪🇨 Ecuador</option>
-                    <option value="chile" data-prefijo="🇨🇱 +56">🇨🇱 Chile</option>
-                    <option value="bolivia" data-prefijo="🇧🇴 +591">🇧🇴 Bolivia</option>
-                    <option value="guatemala" data-prefijo="🇬🇹 +502">🇬🇹 Guatemala</option>
-                    <option value="elsalvador" data-prefijo="🇸🇻 +503">🇸🇻 El Salvador</option>
-                    <option value="argentina" data-prefijo="🇦🇷 +54">🇦🇷 Argentina</option>
-                    <option value="venezuela" data-prefijo="🇻🇪 +58">🇻🇪 Venezuela</option>
-                    <option value="honduras" data-prefijo="🇭🇳 +504">🇭🇳 Honduras</option>
-                    <option value="uruguay" data-prefijo="🇺🇾 +598">🇺🇾 Uruguay</option>
-                    <option value="costarica" data-prefijo="🇨🇷 +506">🇨🇷 Costa Rica</option>
-                </select>
+            <div class="form-group">
+                <label for="pais">2️⃣ ¿De qué pais nos visitas? 🇵🇪 🇨🇴 🇪🇨 🇲🇽 🇨🇱 🇧🇴 🇬🇹<span class="required-asterisk">*</span></label>
+                <input type="text" id="pais" name="pais" placeholder="Tu respuesta" required>
             </div>
 
             <div class="form-group">
                 <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
-                <div class="phone-input-container">
-                    <span id="flag-prefix-display"></span>
-                    <input type="tel" id="telefono" name="telefono" required>
-                </div>
+                <input type="tel" id="telefono" name="telefono" placeholder="Tu respuesta" required>
             </div>
 
             <div class="form-group">
@@ -384,8 +319,8 @@
             </div>
 
             <div class="form-group">
-                <label for="comentario">1️⃣3️⃣ Déjanos un Comentario</label>
-                <textarea id="comentario" name="comentario"></textarea>
+                <label for="mensaje">1️⃣3️⃣ Envíanos un mensaje</label>
+                <textarea id="mensaje" name="mensaje"></textarea>
             </div>
 
             <button type="submit" class="submit-button">Enviar Respuesta</button>
@@ -402,139 +337,34 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener('DOMContentLoaded', function() {
+        const formulario = document.getElementById('miFormulario');
+        const mainContainer = document.getElementById('main-container');
+        const mensajeExito = document.getElementById('mensaje-exito');
 
-    const formulario = document.getElementById("miFormulario");
-    const paisSelect = document.getElementById("pais");
-    const telefonoInput = document.getElementById("telefono");
-    const prefixDisplay = document.getElementById("flag-prefix-display");
-    const submitButton = formulario.querySelector(".submit-button");
+        formulario.addEventListener('submit', function(event) {
+            // Detiene el envío normal del formulario
+            event.preventDefault();
 
-    // Definición de formatos, incluye REGEX para validación.
-    const formatos = {
-        colombia: { prefijo: "+57", placeholder: "3XX XXX XXXX", regex: /^3\d{9}$/ },
-        mexico: { prefijo: "+52", placeholder: "XX XXXX XXXX", regex: /^\d{10}$/ },
-        peru: { prefijo: "+51", placeholder: "9XX XXX XXX", regex: /^9\d{8}$/ },
-        ecuador: { prefijo: "+593", placeholder: "9XX XXX XXX", regex: /^0?9\d{8}$/ }, // Permite o no el 0 inicial
-        chile: { prefijo: "+56", placeholder: "9 XXXX XXXX", regex: /^9\d{8}$/ },
-        bolivia: { prefijo: "+591", placeholder: "7XX XXXX", regex: /^[67]\d{7}$/ },
-        guatemala: { prefijo: "+502", placeholder: "XXXX XXXX", regex: /^[3-5]\d{7}$/ },
-        elsalvador: { prefijo: "+503", placeholder: "XXXX XXXX", regex: /^[6-7]\d{7}$/ },
-        argentina: { prefijo: "+54", placeholder: "9 XX XXXX XXXX", regex: /^9\d{10}$/ },
-        venezuela: { prefijo: "+58", placeholder: "4XX XXX XXXX", regex: /^4\d{9}$/ },
-        honduras: { prefijo: "+504", placeholder: "XXXX XXXX", regex: /^[389]\d{7}$/ },
-        uruguay: { prefijo: "+598", placeholder: "9 XXXX XXXX", regex: /^9\d{7}$/ },
-        costarica: { prefijo: "+506", placeholder: "XXXX XXXX", regex: /^[6-8]\d{7}$/ },
-        default: { prefijo: "", placeholder: "Tu número de teléfono", regex: /^\d{5,15}$/ }
-    };
+            // Oculta todo el contenido principal y muestra la imagen de agradecimiento
+            mainContainer.style.display = 'none';
+            mensajeExito.style.display = 'block';
 
-    // Función principal para actualizar el input al cambiar el país
-    function updatePhoneInput() {
-        const selectedOption = paisSelect.options[paisSelect.selectedIndex];
-        const countryCode = selectedOption.value;
-        const prefixDisplayValue = selectedOption.getAttribute('data-prefijo') || '';
-        const format = formatos[countryCode] || formatos.default;
+            // Desplaza la página al inicio de forma suave
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
 
-        // 1. Actualiza el prefijo visual
-        prefixDisplay.textContent = prefixDisplayValue;
+            // Envía los datos a Google Sheets usando la API Fetch
+            const formData = new FormData(formulario);
+            const scriptURL = formulario.getAttribute('action');
 
-        // 2. Actualiza el placeholder
-        telefonoInput.placeholder = format.placeholder;
-
-        // 3. Limpia el valor y fuerza la re-validación
-        validatePhone(true);
-    }
-
-    // Función para limpiar el input y validar
-    function validatePhone() {
-        // Limpia solo dígitos (no permitimos el signo + en el input directo)
-        let cleanedNumber = telefonoInput.value.replace(/\D/g, '');
-        telefonoInput.value = cleanedNumber;
-
-        const countryCode = paisSelect.value;
-        const format = formatos[countryCode] || formatos.default;
-
-        // Validación visual: si existe un formato, verifica el REGEX
-        if (countryCode && format && format.regex) {
-            if (format.regex.test(cleanedNumber)) {
-                telefonoInput.style.border = '1px solid green';
-            } else {
-                telefonoInput.style.border = '1px solid red';
-            }
-        } else {
-            // Si no hay país seleccionado, volvemos al estilo por defecto
-            telefonoInput.style.border = '1px solid black';
-        }
-    }
-
-    // EVENT LISTENERS
-    // 1. Al cambiar el país
-    paisSelect.addEventListener("change", updatePhoneInput);
-
-    // 2. Al escribir en el input de teléfono
-    telefonoInput.addEventListener("input", validatePhone);
-
-    // Inicializar el input con el valor por defecto si existe, o limpiar.
-    updatePhoneInput();
-
-    // 3. Manejo del Submit del Formulario
-    formulario.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const countryCode = paisSelect.value;
-        const format = formatos[countryCode];
-        let cleanedNumber = telefonoInput.value.replace(/\D/g, '');
-        
-        // VALIDACIÓN FINAL
-        if (!countryCode) {
-            alert("Por favor, selecciona tu país.");
-            paisSelect.focus();
-            return;
-        }
-
-        if (!format || !format.regex.test(cleanedNumber)) {
-            alert("El número de teléfono no es válido para " + paisSelect.options[paisSelect.selectedIndex].text.trim());
-            telefonoInput.focus();
-            return;
-        }
-
-        // --- PREPARACIÓN FINAL PARA EL ENVÍO ---
-        // Construye el número final con prefijo para el envío
-        const finalPhoneNumber = format.prefijo + cleanedNumber;
-        
-        // Creamos un campo oculto para enviar el número con prefijo a la hoja de cálculo
-        let hiddenInput = document.createElement("input");
-        hiddenInput.type = "hidden";
-        hiddenInput.name = "telefono"; // Usamos el nombre 'telefono' para que Google Sheets lo capture
-        hiddenInput.value = finalPhoneNumber;
-        formulario.appendChild(hiddenInput);
-
-        // Proceder con el envío
-        const formData = new FormData(formulario);
-        submitButton.disabled = true;
-        submitButton.textContent = "Enviando...";
-
-        fetch(formulario.action, {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                // Mostrar mensaje de éxito
-                document.getElementById("main-container").style.display = 'none';
-                document.getElementById("mensaje-exito").style.display = 'block';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                throw new Error('Error al enviar el formulario.');
-            }
-        })
-        .catch(error => {
-            alert('Hubo un error al enviar el formulario. Intenta de nuevo.');
-            console.error('Error:', error);
-            submitButton.disabled = false;
-            submitButton.textContent = "Enviar Respuesta";
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => console.log('Envío exitoso!', response))
+                .catch(error => console.error('Error!', error));
         });
     });
-});
 </script>
 
 </body>
