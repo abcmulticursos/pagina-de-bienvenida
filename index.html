@@ -380,15 +380,16 @@ selectPais.addEventListener('change', function() {
     const pais = selectPais.value;
     if (paisesInfo[pais]) {
         const info = paisesInfo[pais];
-        inputTelefono.value = info.prefijo;
-        inputTelefono.maxLength = info.prefijo.length + info.longitud;
+        // Agregamos un espacio después del prefijo
+        inputTelefono.value = info.prefijo + " ";
+        inputTelefono.maxLength = info.prefijo.length + 1 + info.longitud; // +1 por el espacio
     }
 });
 
 inputTelefono.addEventListener('keydown', function(e) {
     const pais = selectPais.value;
     if (!paisesInfo[pais]) return;
-    const prefijoLength = paisesInfo[pais].prefijo.length;
+    const prefijoLength = paisesInfo[pais].prefijo.length + 1; // +1 por el espacio
     if ((this.selectionStart <= prefijoLength) && (e.key === "Backspace" || e.key === "Delete")) {
         e.preventDefault();
     }
