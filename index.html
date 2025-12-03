@@ -191,52 +191,20 @@
 
 /* *** ESTILOS CLAVE CORREGIDOS PARA EL INPUT DE TELÉFONO *** */
 
-/* Contenedor del campo de teléfono */
+/* Contenedor del campo de teléfono (QUITAMOS FLEX PARA UN SOLO CAMPO) */
 .phone-input-container {
-    display: flex; /* Hacemos que los elementos internos se pongan en línea */
-    align-items: center; /* Centrar verticalmente, aunque los inputs ya tienen la misma altura */
-    margin-bottom: 30px; /* Separación después del grupo de teléfono (copiando el margin-bottom general) */
-}
-
-/* Estilo para el input del prefijo (AÑADIDO Y AJUSTADO) */
-.prefix-input {
-    /* ANCHO CORREGIDO: 25% */
-    width: 25%;
-    height: 54px;
-    line-height: 54px;
-    margin-right: 5px; /* Pequeña separación del campo de número */
-    text-align: center;
-    font-weight: bold;
-    color: black;
-    /* Estilos base */
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid black;
-    font-size: 19px;
-    font-family: Arial, sans-serif;
-    /* Estilos para que parezca NO EDITABLE */
-    background-color: #f0f0f0; 
-    color: #333; 
-    cursor: default; 
-    
-    margin-bottom: 0 !important; /* Sobreescribir el margen de 30px del input general */
+    margin-bottom: 30px; /* Separación después del grupo de teléfono (copiando el margin-bottom general) */
 }
 
 /* Estilo para el input del número de teléfono (AJUSTADO) */
 .form-group input[type="tel"] {
-    /* ANCHO CORREGIDO: 75% */
-    width: 75%; 
-    padding-left: 10px;
-    /* Aseguramos que herede el estilo general de input */
-    border: 1px solid black;
-    background-color: white;
-    border-radius: 5px;
-    height: 54px;
-    line-height: 54px;
-    
-    margin-bottom: 0 !important; /* Sobreescribir el margen de 30px del input general */
+    /* ANCHO CORREGIDO: 100% */
+    width: 100%;  /* ¡ESTE ES EL CAMBIO CLAVE PARA QUE SE VEA UNO SOLO! */
+    padding-left: 10px;
+    /* Aseguramos que herede el estilo general de input */
+    /* ... el resto de estilos ... */
 }
+
 </style>
 </head>
 <body>
@@ -305,12 +273,12 @@
 </div>
 
 <div class="form-group">
-    <label for="telefono_numero">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
-    <div class="phone-input-container">
-<input type="text" id="prefijo" name="prefijo_display" class="prefix-input" value="---" readonly tabindex="-1">
-        <input type="tel" id="telefono_numero" name="telefono_numero" placeholder="Número de Teléfono" required pattern="[0-9]*" inputmode="numeric" maxlength="15">
-        <input type="hidden" id="telefono_completo" name="telefono_completo">
-    </div>
+    <label for="telefono_numero">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
+    <div class="phone-input-container">
+                <input type="hidden" id="prefijo" name="prefijo_display" class="prefix-input" value="---" readonly tabindex="-1">
+        <input type="tel" id="telefono_numero" name="telefono_numero" placeholder="Número de Teléfono" required pattern="[0-9]*" inputmode="numeric" maxlength="15">
+        <input type="hidden" id="telefono_completo" name="telefono_completo">
+    </div>
 </div>
 
             <div class="form-group">
