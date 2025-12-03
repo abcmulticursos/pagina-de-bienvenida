@@ -192,51 +192,28 @@
 /* *** ESTILOS CLAVE AÑADIDOS/MODIFICADOS PARA EL INPUT DE TELÉFONO *** */
 /* Contenedor del campo de teléfono */
 .phone-input-container {
+    /* CLAVE: Solo lo restauramos a un contenedor simple con margen de separación */
     position: relative;
     width: 100%; 
     margin-bottom: 30px; /* Para mantener el espaciado entre preguntas */
-    height: 54px;
-    /* CLAVE: Le damos el estilo de input al contenedor y ocultamos los bordes internos */
-    border: 1px solid black; 
-    border-radius: 5px;
-    background-color: white;
-    padding: 0; /* Aseguramos que no haya padding */
+    height: 54px; /* Lo mantenemos, aunque el input ya lo define */
+    /* IMPORTANTE: Quitamos todos los estilos de borde y fondo del contenedor */
+    border: none;
+    background: none;
+    padding: 0;
 }
 
 /* El campo de input en sí */
 .form-group input[type="tel"] {
-    /* Se mantiene el height y line-height de 54px para el centrado vertical */
-    margin-bottom: 0;
-    /* CLAVE: Eliminamos todos los bordes y el fondo ya que los tiene el contenedor */
-    border: none;
-    background: transparent;
-    border-radius: 0;
-    /* CLAVE: Espacio para el prefijo + bandera. Ajuste a 125px */
-    padding-left: 125px; 
+    /* CLAVE: Lo restauramos a un campo normal, solo aseguramos que el margen sea 0 */
+    margin-bottom: 0;
+    padding-left: 10px; /* Restauramos el padding estándar */
+    /* IMPORTANTE: Quitamos cualquier borde o fondo especial. Debería heredar el estilo general. */
+    border: 1px solid black; 
+    background-color: white;
+    border-radius: 5px;
 }
 
-/* Estilo para el elemento que contendrá el emoji y prefijo */
-/* CLAVE: Ahora solo aplicamos la línea divisoria (borde derecho) */
-#flag-prefix-display {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 54px; /* Altura completa */
-    line-height: 54px; /* Centra verticalmente */
-    padding: 0 10px;
-    color: black;
-    font-size: 19px;
-    font-weight: normal;
-    pointer-events: none;
-    background-color: transparent; /* Fondo transparente (el contenedor tiene el blanco) */
-    z-index: 10;
-    white-space: nowrap;
-    
-    /* AÑADIDO: Solo agregamos el borde derecho como separador vertical */
-    border-right: 1px solid black; 
-    width: 115px; /* Ancho fijo para la sección (bandera + prefijo) */
-    text-align: center; /* Centramos el contenido */
-}
 </style>
 </head>
 <body>
@@ -285,7 +262,7 @@
 
 <div class="form-group">
 <label for="pais">2️⃣ ¿De qué país nos visitas?<span class="required-asterisk">*</span></label>
-<select id="pais" name="pais" required onchange="updatePhoneInput()">
+<select id="pais" name="pais" required>
     <option value="" disabled selected hidden>Selecciona un país</option>
     <option value="Colombia" data-prefijo="+57" data-bandera="🇨🇴">🇨🇴 Colombia</option>
     <option value="México" data-prefijo="+52" data-bandera="🇲🇽">🇲🇽 México</option>
@@ -304,13 +281,10 @@
 </select>
 
             <div class="form-group">
-                <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
+<label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
                 <div class="phone-input-container">
-                    <span id="flag-prefix-display"></span>
                     <input type="tel" id="telefono" name="telefono" placeholder="Número de Teléfono" required pattern="[0-9]*" inputmode="numeric">
                 </div>
-                                <input type="hidden" id="telefono_completo" name="telefono_completo">
-            </div>
 
             <div class="form-group">
                 <label for="asesor">4️⃣ Ya sabes que Alberto Salinas es tu Asesor? 😎<span class="required-asterisk">*</span></label>
@@ -425,42 +399,9 @@
         'Otro País': { min: 6, max: 15, placeholder: 'Ingresa tu número (sin código de área)' }
     };
 
-    // 2. Función para actualizar la bandera y el prefijo
-    function updatePhoneInput() {
-        const paisSelect = document.getElementById('pais');
-        const display = document.getElementById('flag-prefix-display');
-        const telefonoInput = document.getElementById('telefono');
-        const selectedOption = paisSelect.options[paisSelect.selectedIndex];
-
-        const prefijo = selectedOption.getAttribute('data-prefijo');
-        const bandera = selectedOption.getAttribute('data-bandera');
-        const pais = selectedOption.value;
-
-        if (prefijo) {
-            display.textContent = `${bandera} ${prefijo}`;
-            display.style.display = 'block'; // Asegura que se muestre
-        } else {
-            display.textContent = '';
-            display.style.display = 'none'; // Oculta si no hay prefijo (ej: "Otro País" si prefijo está vacío)
-        }
-
-        // Aplicar la validación de longitud y placeholder
-        const formato = formatos[pais] || { min: 6, max: 15, placeholder: 'Número de Teléfono' };
-        
-        telefonoInput.setAttribute('minlength', formato.min);
-        telefonoInput.setAttribute('maxlength', formato.max);
-        telefonoInput.placeholder = formato.placeholder;
-
-        // Limpiar el input de teléfono si cambiamos de país
-        telefonoInput.value = '';
-    }
 
     // Asegurar que la función se ejecute al cargar para inicializar el campo si hay un país por defecto (Aunque el select tiene "disabled selected hidden")
     // Se añade un pequeño retardo para asegurar que el DOM se haya cargado completamente
-    window.addEventListener('load', function() {
-        // Inicializar el campo (se ejecutará con el valor 'Selecciona un país', mostrando vacío o nada)
-        // Pero es necesario para que la función sea conocida globalmente por onchange="updatePhoneInput()"
-    });
 
     // 3. Lógica principal del formulario (AJUSTADA)
     document.addEventListener('DOMContentLoaded', function() {
@@ -471,11 +412,6 @@
         const telefonoInput = document.getElementById('telefono');
         const telefonoCompletoInput = document.getElementById('telefono_completo');
         
-        // Inicializa el campo de teléfono al cargar la página.
-        updatePhoneInput(); 
-        
-        // Asignar la función al evento onchange del select de país (aunque ya está en el HTML)
-        paisSelect.addEventListener('change', updatePhoneInput); 
 
         formulario.addEventListener('submit', function(event) {
             
@@ -498,14 +434,11 @@
                 return;
             }
 
-            // 2. Ensamblar el número de teléfono completo (prefijo + número)
-            const prefijo = selectedOption.getAttribute('data-prefijo');
-            
-            // Si hay prefijo, lo usamos. Si no, usamos solo el número (para "Otro País" si no se proporciona prefijo)
-            const telefonoFinal = prefijo ? prefijo + telefonoNumero : telefonoNumero;
-            
-            // 3. Asignar el valor final al campo oculto que se enviará al Google Sheet
-            telefonoCompletoInput.value = telefonoFinal;
+// 2. Ensamblar el número de teléfono completo (solo el número, ya no hay prefijo)
+            const telefonoFinal = telefonoNumero;
+            
+            // 3. Asignar el valor final al campo oculto que se enviará al Google Sheet
+            telefonoCompletoInput.value = telefonoFinal;
 
 
             // Detiene el envío normal del formulario (ESTO DEBE IR DESPUÉS DE LA VALIDACIÓN)
@@ -530,8 +463,6 @@
                 .catch(error => console.error('Error!', error));
         });
         
-        // Se asegura de que updatePhoneInput sea global para que el onchange del select lo encuentre
-        window.updatePhoneInput = updatePhoneInput;
     });
 </script>
 
