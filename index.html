@@ -257,11 +257,9 @@
 
 <div class="form-group">
     <label for="telefono">3️⃣ Tu Teléfono<span class="required-asterisk">*</span></label>
-    <div style="display: flex; align-items: center; gap: 5px;">
-        <span id="prefijo-telefono" style="font-size:19px; font-weight:bold; color:black;"> </span>
-        <input type="tel" id="telefono" name="telefono" placeholder="Tu número" required>
-    </div>
+    <input type="tel" id="telefono" name="telefono" placeholder="Tu número" required>
 </div>
+
 
 
             <div class="form-group">
@@ -385,7 +383,9 @@ selectPais.addEventListener('change', function() {
     const pais = selectPais.value;
     if (paisesInfo[pais]) {
         const info = paisesInfo[pais];
-        prefijoSpan.textContent = info.prefijo; // mostrar prefijo separado
+// prefijo visible eliminado, solo control de longitud
+inputTelefono.maxLength = info.longitud; 
+inputTelefono.value = ''; // limpiar número anterior
         inputTelefono.maxLength = info.longitud; // mantener cantidad de dígitos
         inputTelefono.value = ''; // limpiar número anterior
     }
